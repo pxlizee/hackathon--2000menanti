@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SOCRATES-GEMMA | Masuk Petualangan</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Be+Vietnam+Pro:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Integration of Theme Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "on-tertiary-fixed-variant": "#005230",
+                "tertiary-fixed": "#95f7bb",
+                "tertiary": "#006d41",
+                "surface-bright": "#faf9f5",
+                "surface-tint": "#9a4600",
+                "secondary-container": "#68abff",
+                "on-surface": "#1b1c1a",
+                "inverse-on-surface": "#f2f1ed",
+                "surface-variant": "#e3e2df",
+                "on-tertiary-fixed": "#002110",
+                "secondary-fixed-dim": "#a4c9ff",
+                "on-error": "#ffffff",
+                "inverse-primary": "#ffb68d",
+                "surface-container-lowest": "#ffffff",
+                "surface-container-high": "#e9e8e4",
+                "surface-dim": "#dbdad6",
+                "surface-container-low": "#f4f4f0",
+                "surface-container": "#efeeea",
+                "outline-variant": "#ddc1b3",
+                "outline": "#8a7266",
+                "secondary-fixed": "#d4e3ff",
+                "primary-fixed": "#ffdbc9",
+                "primary-fixed-dim": "#ffb68d",
+                "error-container": "#ffdad6",
+                "secondary": "#0060ac",
+                "on-error-container": "#93000a",
+                "on-secondary-container": "#003e73",
+                "inverse-surface": "#2f312e",
+                "on-primary": "#ffffff",
+                "on-primary-fixed-variant": "#763300",
+                "on-tertiary": "#ffffff",
+                "error": "#ba1a1a",
+                "primary": "#9a4600",
+                "surface": "#faf9f5",
+                "surface-container-highest": "#e3e2df",
+                "on-primary-container": "#682d00",
+                "tertiary-fixed-dim": "#7adaa1",
+                "on-tertiary-container": "#00482a",
+                "on-secondary-fixed": "#001c39",
+                "on-primary-fixed": "#321200",
+                "on-background": "#1b1c1a",
+                "on-surface-variant": "#564338",
+                "primary-container": "#ff8a3d",
+                "on-secondary": "#ffffff",
+                "on-secondary-fixed-variant": "#004883",
+                "tertiary-container": "#5cbc86",
+                "background": "#faf9f5"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+            },
+            "spacing": {
+                "xl": "80px",
+                "margin-mobile": "16px",
+                "sm": "12px",
+                "xs": "4px",
+                "lg": "48px",
+                "gutter": "24px",
+                "md": "24px",
+                "margin-desktop": "64px",
+                "base": "8px"
+            },
+            "fontFamily": {
+                "body-lg": ["Be Vietnam Pro"],
+                "body-md": ["Be Vietnam Pro"],
+                "label-md": ["Be Vietnam Pro"],
+                "headline-sm": ["Plus Jakarta Sans"],
+                "headline-md": ["Plus Jakarta Sans"],
+                "headline-lg": ["Plus Jakarta Sans"],
+                "display-lg": ["Plus Jakarta Sans"]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        body {
+            background-color: #faf9f5;
+            font-family: 'Be Vietnam Pro', sans-serif;
+            overflow: hidden;
+        }
+
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .squish-click:active {
+            transform: scale(0.95);
+            transition: transform 0.1s ease-out;
+        }
+
+        .shadow-soft {
+            box-shadow: 0 16px 32px -12px rgba(0, 96, 172, 0.08);
+        }
+
+        .input-focus-ring:focus {
+            outline: none;
+            border-color: #0060ac;
+            box-shadow: 0 0 0 4px rgba(0, 96, 172, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex items-center justify-center relative overflow-hidden">
+<!-- Atmospheric Animated Background Elements -->
+<div class="absolute top-10 left-10 w-32 h-32 bg-tertiary-fixed-dim/30 rounded-full blur-3xl opacity-50"></div>
+<div class="absolute bottom-20 right-10 w-64 h-64 bg-secondary-fixed/40 rounded-full blur-3xl opacity-50"></div>
+<!-- Main Container: 2-Column Split -->
+<main class="w-full max-w-7xl mx-auto px-margin-desktop grid grid-cols-1 md:grid-cols-2 gap-gutter items-center z-10">
+<!-- Left Column: Illustration & Branding -->
+<section class="hidden md:flex flex-col gap-md pr-lg">
+<header class="mb-sm">
+<!-- Branding from JSON Identity -->
+<div class="flex items-center gap-base">
+<span class="material-symbols-outlined text-primary text-[48px]" style="font-variation-settings: 'FILL' 1;">rocket_launch</span>
+<h1 class="font-display-lg text-display-lg font-black text-primary tracking-tight">ORION CLASS</h1>
+</div>
+<p class="font-headline-sm text-headline-sm text-on-surface-variant mt-2">Mulai petualangan belajarmu hari ini!</p>
+</header>
+<div class="relative w-full aspect-square rounded-[32px] overflow-hidden shadow-soft floating">
+<img class="w-full h-full object-cover" data-alt="A futuristic, friendly robot from the future, sleek white and metallic chrome accents, glowing soft cyan details, floating in a high-tech digital learning environment, cinematic lighting, 3D render style, cute and educational theme, high resolution, clean background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDR8m8SYmZygyJIPw_ojUOKPmDQhA1usjZ9i9JgTfgfzrFPmlgKdSGAMQ9M6k9jmV4X6RvmPDHG5q5HUW5Hej-7_MtgiZerd4DEBLFFyA_TUbQcCty5R-u-lYlxMkNLnNNf4HPHlOfav-xIDde3hTyg0IzzZgZpS1R3eLXfuW6Z45zRtDsuzWIqHgbmV28MpJ1_dcXd8X4rBGTsFbMwEgLf2xE4Yr93SKXo2q8E0YLTPeuvDrJOCdTJm0k9VooaizYFXVTXbIq_87Q"/>
+<!-- Floating badge / Sticker Style -->
+<div class="absolute top-6 right-6 bg-secondary text-on-secondary px-6 py-3 rounded-full font-bold shadow-lg border-2 border-white/20">
+                    Edisi Orion Class
+                </div>
+</div>
+<div class="flex items-center gap-md mt-sm">
+<div class="flex -space-x-3">
+<div class="w-10 h-10 rounded-full border-2 border-white bg-tertiary-container flex items-center justify-center text-white text-xs font-bold">A</div>
+<div class="w-10 h-10 rounded-full border-2 border-white bg-primary-container flex items-center justify-center text-white text-xs font-bold">B</div>
+<div class="w-10 h-10 rounded-full border-2 border-white bg-secondary-container flex items-center justify-center text-white text-xs font-bold">C</div>
+</div>
+<p class="font-label-md text-label-md text-on-surface-variant italic">Bergabunglah dengan 5,000+ penjelajah cilik!</p>
+</div>
+</section>
+<!-- Right Column: Login Form -->
+<section class="flex justify-center md:justify-start" style="opacity: 1; transform: translateY(0px); transition: 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);">
+<div class="w-full max-w-md bg-white p-10 rounded-[24px] shadow-soft border border-surface-container-high relative">
+<!-- Mobile Branding -->
+<div class="md:hidden flex flex-col items-center mb-8">
+<h1 class="font-display-lg text-[32px] font-black text-primary mb-2">SOCRATES-GEMMA</h1>
+<div class="h-1 w-20 bg-primary-container rounded-full"></div>
+</div>
+<div class="mb-8">
+<h2 class="font-headline-md text-headline-md text-on-surface">Masuk Akun</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Halo Sahabat! Masukkan identitasmu untuk melanjutkan petualangan.</p>
+</div>
+<!-- Form -->
+<form class="space-y-6" onsubmit="return false">
+<!-- Input Email/User -->
+<div class="space-y-2">
+<label class="font-label-md text-label-md text-on-surface-variant px-1" for="username">Email atau Nama Pengguna</label>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-secondary transition-colors">person</span>
+<input class="w-full pl-12 pr-4 py-4 bg-surface-container-low border-2 border-surface-container-highest rounded-xl font-body-md text-body-md input-focus-ring transition-all placeholder:text-outline-variant" id="username" placeholder="ketik namamu di sini..." type="text"/>
+</div>
+</div>
+<!-- Input Password -->
+<div class="space-y-2">
+<div class="flex justify-between items-center px-1">
+<label class="font-label-md text-label-md text-on-surface-variant" for="password">Kata Sandi</label>
+<a class="font-label-md text-label-md text-secondary hover:underline transition-all" href="#">Lupa Kata Sandi?</a>
+</div>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-secondary transition-colors">lock</span>
+<input class="w-full pl-12 pr-12 py-4 bg-surface-container-low border-2 border-surface-container-highest rounded-xl font-body-md text-body-md input-focus-ring transition-all placeholder:text-outline-variant" id="password" placeholder="kata sandi rahasiamu..." type="password"/>
+<button class="absolute right-4 top-1/2 -translate-y-1/2 text-outline hover:text-on-surface" id="togglePassword" type="button">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+</div>
+</div>
+<!-- Checkbox -->
+<div class="flex items-center gap-2 px-1">
+<input class="w-5 h-5 rounded border-2 border-outline-variant text-secondary focus:ring-secondary-container" id="remember" type="checkbox"/>
+<label class="font-body-md text-body-md text-on-surface-variant" for="remember">Ingat saya untuk perjalanan berikutnya</label>
+</div>
+<!-- CTA Primary -->
+<button class="w-full bg-primary-container hover:bg-primary text-on-primary-container hover:text-white py-5 rounded-xl font-headline-sm text-headline-sm flex items-center justify-center gap-3 shadow-[0_4px_0_0_#9a4600] active:shadow-none active:translate-y-1 transition-all squish-click" type="submit">
+<span class="">Masuk Petualangan</span>
+<span class="material-symbols-outlined">rocket_launch</span>
+</button>
+</form>
+<!-- Footer Links -->
+<div class="mt-10 pt-8 border-t border-surface-container-high text-center">
+<p class="font-body-md text-body-md text-on-surface-variant">
+                        Belum punya akun? 
+                        <a class="text-secondary font-bold hover:underline" href="#">Daftar Akun Baru</a>
+</p>
+</div>
+<!-- Floating Decor -->
+<div class="absolute -top-4 -right-4 w-12 h-12 bg-tertiary-container rounded-full flex items-center justify-center shadow-lg transform rotate-12">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+</div>
+</section>
+</main>
+<!-- Global Footer -->
+<footer class="fixed bottom-6 w-full text-center z-10 pointer-events-none">
+<p class="font-label-md text-label-md text-outline px-4 pointer-events-auto">
+            © 2024 SOCRATES-GEMMA oleh ORION CLASS. Belajar Jadi Menyenangkan!
+        </p>
+</footer>
+<script>
+        // Password visibility toggle interaction
+        const togglePassword = document.getElementById('togglePassword');
+        const passwordInput = document.getElementById('password');
+
+        togglePassword.addEventListener('click', () => {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            togglePassword.querySelector('span').textContent = type === 'password' ? 'visibility' : 'visibility_off';
+        });
+
+        // Simple subtle entrance animation
+        window.addEventListener('DOMContentLoaded', () => {
+            const form = document.querySelector('section:last-child');
+            form.style.opacity = '0';
+            form.style.transform = 'translateY(20px)';
+            
+            setTimeout(() => {
+                form.style.transition = 'all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)';
+                form.style.opacity = '1';
+                form.style.transform = 'translateY(0)';
+            }, 100);
+        });
+    </script>
+</body></html>

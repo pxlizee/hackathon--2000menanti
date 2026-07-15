@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+
+<html class="light" lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mentor AI - SOCRATES-GEMMA</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Be+Vietnam+Pro:wght@400;500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .fill-icon {
+            font-variation-settings: 'FILL' 1;
+        }
+        /* Custom scrollbar for chat */
+        .chat-scroll::-webkit-scrollbar {
+            width: 6px;
+        }
+        .chat-scroll::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .chat-scroll::-webkit-scrollbar-thumb {
+            background: #ddc1b3;
+            border-radius: 10px;
+        }
+        /* Tactile Button Effect */
+        .btn-tactile {
+            box-shadow: 0 4px 0 0 rgba(0, 0, 0, 0.1);
+            transition: all 0.1s ease;
+        }
+        .btn-tactile:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.1);
+        }
+        /* Squishy interaction */
+        .squish:active {
+            transform: scale(0.96);
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-on-surface": "#f2f1ed",
+                    "on-secondary-container": "#003e73",
+                    "primary-fixed": "#ffdbc9",
+                    "on-background": "#1b1c1a",
+                    "on-primary": "#ffffff",
+                    "tertiary": "#006d41",
+                    "surface-tint": "#9a4600",
+                    "inverse-surface": "#2f312e",
+                    "error": "#ba1a1a",
+                    "on-primary-container": "#682d00",
+                    "secondary": "#0060ac",
+                    "surface-container": "#efeeea",
+                    "on-tertiary-container": "#00482a",
+                    "surface": "#faf9f5",
+                    "surface-container-high": "#e9e8e4",
+                    "primary": "#9a4600",
+                    "tertiary-fixed-dim": "#7adaa1",
+                    "on-secondary-fixed-variant": "#004883",
+                    "on-surface": "#1b1c1a",
+                    "on-error": "#ffffff",
+                    "secondary-fixed-dim": "#a4c9ff",
+                    "on-secondary": "#ffffff",
+                    "surface-variant": "#e3e2df",
+                    "on-tertiary": "#ffffff",
+                    "surface-bright": "#faf9f5",
+                    "secondary-container": "#68abff",
+                    "background": "#faf9f5",
+                    "on-surface-variant": "#564338",
+                    "on-primary-fixed": "#321200",
+                    "on-primary-fixed-variant": "#763300",
+                    "primary-container": "#ff8a3d",
+                    "surface-container-highest": "#e3e2df",
+                    "tertiary-container": "#5cbc86",
+                    "on-secondary-fixed": "#001c39",
+                    "on-error-container": "#93000a",
+                    "outline": "#8a7266",
+                    "inverse-primary": "#ffb68d",
+                    "secondary-fixed": "#d4e3ff",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary-fixed-variant": "#005230",
+                    "surface-container-low": "#f4f4f0",
+                    "surface-dim": "#dbdad6",
+                    "on-tertiary-fixed": "#002110",
+                    "outline-variant": "#ddc1b3",
+                    "primary-fixed-dim": "#ffb68d",
+                    "tertiary-fixed": "#95f7bb",
+                    "error-container": "#ffdad6"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xl": "80px",
+                    "base": "8px",
+                    "xs": "4px",
+                    "gutter": "24px",
+                    "margin-desktop": "64px",
+                    "sm": "12px",
+                    "margin-mobile": "16px",
+                    "lg": "48px",
+                    "md": "24px"
+            },
+            "fontFamily": {
+                    "body-md": ["Be Vietnam Pro"],
+                    "label-md": ["Be Vietnam Pro"],
+                    "headline-lg": ["Plus Jakarta Sans"],
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "body-lg": ["Be Vietnam Pro"],
+                    "headline-sm": ["Plus Jakarta Sans"],
+                    "display-lg": ["Plus Jakarta Sans"],
+                    "headline-lg-mobile": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+</head>
+<body class="bg-surface font-body-md text-on-surface">
+<div class="flex h-screen overflow-hidden">
+<!-- SideNavBar (Shared Component) -->
+<aside class="hidden md:flex flex-col h-full py-md px-base sticky left-0 top-0 overflow-y-auto bg-surface shadow-xl shadow-secondary/10 w-64 rounded-r-3xl z-50">
+<!-- Header Section -->
+<div class="mb-lg px-4">
+<h1 class="font-headline-md text-headline-md font-bold text-primary mb-1">ORION<div>CLASS</div></h1>
+<p class="font-label-md text-label-md text-on-surface-variant opacity-80">Petualangan Belajar</p>
+</div>
+<!-- Main Nav Items -->
+<nav class="flex-1 space-y-2">
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high rounded-full px-4 py-3 transition-colors hover:scale-105 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-md text-label-md">Beranda</span>
+</a>
+<a class="flex items-center gap-3 bg-secondary-container text-on-secondary-container rounded-full px-4 py-3 font-bold hover:scale-105 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined fill-icon">smart_toy</span>
+<span class="font-label-md text-label-md">Mentor AI</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high rounded-full px-4 py-3 transition-colors hover:scale-105 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">book_2</span>
+<span class="font-label-md text-label-md">Perpustakaan</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high rounded-full px-4 py-3 transition-colors hover:scale-105 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-md text-label-md">Laporan</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high rounded-full px-4 py-3 transition-colors hover:scale-105 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-md text-label-md">Pusat Bantuan</span>
+</a>
+</nav>
+<!-- CTA -->
+<div class="mt-md mb-md px-4">
+<button class="w-full bg-primary-container text-on-primary-container font-bold py-3 rounded-full hover:scale-105 transition-all active:scale-95 btn-tactile">
+                    Mulai Belajar
+                </button>
+</div>
+<!-- Footer Nav Items -->
+<div class="pt-base border-t border-outline-variant/30 space-y-2">
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high rounded-full px-4 py-3 transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Pengaturan</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high rounded-full px-4 py-3 transition-colors" href="#">
+<span class="material-symbols-outlined text-error">logout</span>
+<span class="font-label-md text-label-md">Keluar</span>
+</a>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="flex-1 flex flex-col min-w-0 bg-background relative overflow-hidden">
+<!-- Atmospheric Shader Background (Subtle) -->
+<!-- TopAppBar -->
+<header class="flex justify-between items-center w-full px-gutter py-sm bg-surface/80 backdrop-blur-md z-40">
+<div class="flex items-center gap-4">
+<button class="md:hidden p-2 text-on-surface-variant">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="hidden md:block">
+<h2 class="font-headline-sm text-headline-sm text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">psychology</span>
+                            Tanya Mentor AI
+                        </h2>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<div class="hidden sm:flex items-center bg-surface-container rounded-full px-4 py-2 border-2 border-outline-variant/50 focus-within:border-secondary transition-all">
+<span class="material-symbols-outlined text-on-surface-variant mr-2">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm font-label-md w-40 md:w-64" placeholder="Cari topik..." type="text"/>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 hover:bg-secondary-container/50 rounded-full transition-all active:translate-y-0.5 text-on-surface-variant">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="flex items-center gap-2 p-1 pr-3 hover:bg-secondary-container/50 rounded-full transition-all active:translate-y-0.5 text-on-surface-variant">
+<span class="material-symbols-outlined text-4xl">account_circle</span>
+<span class="hidden lg:block font-label-md">Budi</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Chat Interface Container -->
+<div class="flex-1 flex flex-col px-margin-mobile md:px-margin-desktop py-base z-10 overflow-hidden">
+<!-- Chat Window (Bento-inspired container) -->
+<div class="flex-1 bg-surface-container-lowest rounded-[32px] shadow-2xl shadow-secondary/5 border-2 border-white/80 overflow-hidden flex flex-col lg:flex-row relative">
+<!-- Left: Chat Messages Area -->
+<div class="flex-1 flex flex-col h-full overflow-hidden">
+<!-- Scrollable Message List -->
+<div class="flex-1 overflow-y-auto chat-scroll p-md md:p-lg space-y-6">
+<!-- AI Welcome Message -->
+<div class="flex items-start gap-4 max-w-[85%]">
+<div class="w-12 h-12 rounded-2xl bg-secondary-container flex items-center justify-center shrink-0 shadow-lg shadow-secondary/20">
+<span class="material-symbols-outlined text-on-secondary-container text-2xl fill-icon">smart_toy</span>
+</div>
+<div class="bg-surface-container-high p-5 rounded-2xl rounded-tl-none border-b-2 border-surface-variant relative">
+<p class="text-on-surface-variant font-body-md">
+                                        Halo Budi! 👋 Saya adalah Mentor AI-mu. Hari ini kita mau menjelajahi dunia apa? Apakah kamu ingin belajar tentang <strong>Bintang-bintang</strong> di luar angkasa atau rahasia di dalam <strong>Samudra Biru</strong>?
+                                    </p>
+<span class="absolute -left-2 top-0 w-4 h-4 bg-surface-container-high clip-path-triangle"></span>
+</div>
+</div>
+<!-- User Message -->
+<div class="flex items-start gap-4 justify-end">
+<div class="bg-primary-container p-5 rounded-2xl rounded-tr-none border-b-2 border-primary relative max-w-[85%]">
+<p class="text-on-primary-container font-body-md">
+                                        Aku ingin tahu kenapa langit warnanya biru pas siang hari, tapi jadi oranye pas sore? 🌅
+                                    </p>
+</div>
+<div class="w-12 h-12 rounded-2xl bg-surface-container flex items-center justify-center shrink-0 border-2 border-white overflow-hidden shadow-md">
+<img class="w-full h-full object-cover" data-alt="A portrait of a cheerful young Asian boy with a warm smile, wearing a casual school uniform, soft studio lighting, Pixar-style 3D character aesthetic with friendly features and vibrant colors." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkAjB0RmoBelPAEnnxSt1ks9JZeY2ta_oKQg9if9MPM_K1lyjRx5JnQX6kAQlVWywI5caEN64ReWu0H3hc0ybXx_Y7v80Khpr9FzwY69QRakVeETpEJ4fLpS6B-R4vBA097IzWiq1azdzL2SfyGXjddntCzyLc9EX_HA7-QAB_lgbN4VJUAQnq5o6EhuessYnp-qozQJIwXyEZ72tS5vfa1BGLgJSOJTeIwvBFPm3D8IJcF41ngw-gE_m_v856CwlPbNfK5L-1jOI"/>
+</div>
+</div>
+<!-- AI Response with Interactive Card -->
+<div class="flex items-start gap-4 max-w-[85%]">
+<div class="w-12 h-12 rounded-2xl bg-secondary-container flex items-center justify-center shrink-0 shadow-lg shadow-secondary/20">
+<span class="material-symbols-outlined text-on-secondary-container text-2xl fill-icon">smart_toy</span>
+</div>
+<div class="space-y-4 flex-1">
+<div class="bg-surface-container-high p-5 rounded-2xl rounded-tl-none border-b-2 border-surface-variant">
+<p class="text-on-surface-variant font-body-md">
+                                            Pertanyaan yang luar biasa! Itu karena cahaya matahari melakukan perjalanan panjang menembus udara kita. Anggap saja udara kita seperti filter raksasa!
+                                        </p>
+</div>
+<!-- Educational Content Card -->
+<div class="bg-white rounded-2xl p-0 border-2 border-secondary/10 shadow-xl overflow-hidden hover:scale-[1.02] transition-transform duration-300">
+<div class="h-40 bg-secondary-fixed relative overflow-hidden">
+<div class="w-full h-full bg-cover bg-center" data-alt="A whimsical 3D illustration showing sunlight beams splitting into a rainbow spectrum as they hit a soft, cloud-like atmosphere. The background is a gradient of deep space blue to warm atmospheric orange, vibrant and educational style." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAAKeCXXDh-Q23bn_XxJTPbLausIqR60vqn6Z9NmD22IJ8wUcqS__dT_LSVvfOybV35iDQ1n_70rLQZGP-83bANWv7OrMf8QMq2njXMhldOKH7PEQdSTejRl31UfKRwajUj71Zn1dkEW3BVQ2vPc_-WL8BVx6nxyak52HTrvaFkcTJAQ9GRiZheYAY5kMIG6UAMuK06tgyK4zVQaWtmZas3fzsbya01E8jl1lL4r493g_xMoPqDapyfQarxoZUeUFvK8oisYebwprM')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+<div class="absolute bottom-3 left-4 flex items-center gap-2 text-white">
+<span class="material-symbols-outlined text-lg">science</span>
+<span class="font-label-md">Eksperimen Cahaya</span>
+</div>
+</div>
+<div class="p-4">
+<h4 class="font-headline-sm text-on-surface mb-1">Hamburan Rayleigh</h4>
+<p class="text-sm text-on-surface-variant mb-4">Cahaya biru tersebar ke segala arah oleh molekul kecil di atmosfer bumi.</p>
+<button class="w-full py-2 bg-secondary text-white font-bold rounded-xl btn-tactile squish">Coba Simulasi</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Chat Input Area -->
+<div class="p-md md:p-gutter border-t border-surface-variant/30 bg-surface/50 backdrop-blur-sm">
+<div class="max-w-4xl mx-auto flex items-end gap-3">
+<div class="flex-1 bg-white rounded-3xl border-2 border-outline-variant p-2 flex items-center transition-all focus-within:border-secondary focus-within:shadow-lg focus-within:shadow-secondary/10">
+<button class="p-3 text-on-surface-variant hover:bg-surface-container-high rounded-full transition-all">
+<span class="material-symbols-outlined">attach_file</span>
+</button>
+<textarea class="flex-1 border-none focus:ring-0 text-on-surface font-body-md py-3 resize-none bg-transparent chat-scroll" placeholder="Tanyakan apa saja pada Mentor..." rows="1"></textarea>
+<button class="p-3 text-on-surface-variant hover:bg-surface-container-high rounded-full transition-all">
+<span class="material-symbols-outlined">mic</span>
+</button>
+</div>
+<button class="w-14 h-14 bg-primary text-white rounded-full flex items-center justify-center shadow-lg shadow-primary/30 hover:scale-110 active:scale-90 transition-all btn-tactile">
+<span class="material-symbols-outlined text-3xl">send</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Right: Context/Sidebar (Asymmetric Layout) -->
+<div class="hidden lg:flex w-80 bg-surface-container-low border-l border-white/50 flex-col p-md gap-md overflow-y-auto"><div class="bg-white rounded-3xl p-5 shadow-md border-2 border-primary-container/20 space-y-4">
+<div class="flex items-center justify-between">
+<h5 class="font-bold text-primary flex items-center gap-2">
+<span class="material-symbols-outlined">trending_up</span> Status Belajar
+</h5>
+<span class="text-[10px] bg-primary-container px-2 py-0.5 rounded-full text-on-primary-container font-bold">AKTIF</span>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between items-end">
+<p class="text-xs text-on-surface-variant">Sedang Mempelajari:</p>
+<p class="font-bold text-sm text-on-surface">Bilangan Bulat</p>
+</div>
+<div class="w-full bg-surface-container-high h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[85%] rounded-full"></div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-3 py-2 border-y border-outline-variant/20">
+<div class="text-center">
+<p class="text-[10px] text-on-surface-variant uppercase">Waktu Belajar</p>
+<p class="font-bold text-primary">45 Menit</p>
+</div>
+<div class="text-center border-l border-outline-variant/20">
+<p class="text-[10px] text-on-surface-variant uppercase">Pemahaman</p>
+<p class="font-bold text-primary">85%</p>
+</div>
+</div>
+<div class="flex gap-3 items-start bg-primary-container/10 p-3 rounded-2xl">
+<span class="material-symbols-outlined text-primary">auto_awesome</span>
+<p class="text-xs leading-relaxed text-on-surface-variant">
+"Wah, progresmu luar biasa! Sedikit lagi kamu akan menguasai konsep Bilangan Bulat sepenuhnya. Terus semangat ya!"
+</p>
+</div>
+</div>
+<!-- Progress Card -->
+<div class="bg-white p-5 rounded-3xl border-b-4 border-tertiary-container shadow-md">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h5 class="font-headline-sm text-tertiary">Misi Hari Ini</h5>
+<p class="text-xs text-on-surface-variant">Penjelajah Sains</p>
+</div>
+<div class="p-2 bg-tertiary-fixed rounded-xl">
+<span class="material-symbols-outlined text-on-tertiary-fixed fill-icon">military_tech</span>
+</div>
+</div>
+<div class="space-y-4">
+<div class="flex items-center gap-3">
+<div class="w-full bg-surface-container rounded-full h-3">
+<div class="bg-tertiary-container h-3 rounded-full w-3/4"></div>
+</div>
+<span class="font-label-md">75%</span>
+</div>
+<div class="flex items-center gap-3 text-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-tertiary text-lg">check_circle</span>
+<span>Tanya 3 pertanyaan ilmiah</span>
+</div>
+</div>
+</div>
+<!-- Related Topics Chips -->
+<div class="space-y-3">
+<h5 class="font-label-md text-on-surface-variant px-2 uppercase tracking-wider">Topik Terkait</h5>
+<div class="flex flex-wrap gap-2">
+<span class="bg-secondary-fixed text-on-secondary-fixed-variant px-4 py-2 rounded-full font-label-md cursor-pointer hover:scale-105 transition-all shadow-sm">Atmosfer</span>
+<span class="bg-primary-fixed text-on-primary-fixed-variant px-4 py-2 rounded-full font-label-md cursor-pointer hover:scale-105 transition-all shadow-sm">Matahari</span>
+<span class="bg-tertiary-fixed text-on-tertiary-fixed-variant px-4 py-2 rounded-full font-label-md cursor-pointer hover:scale-105 transition-all shadow-sm">Pelangi</span>
+<span class="bg-surface-container-highest text-on-surface-variant px-4 py-2 rounded-full font-label-md cursor-pointer hover:scale-105 transition-all shadow-sm">Prisma</span>
+</div>
+</div>
+<!-- Wise Quote/Fact Box -->
+<div class="mt-auto bg-gradient-to-br from-secondary-container to-secondary p-5 rounded-3xl text-white shadow-xl relative overflow-hidden group">
+<div class="absolute -right-4 -top-4 opacity-20 group-hover:scale-125 transition-transform duration-500">
+<span class="material-symbols-outlined text-[100px]">lightbulb</span>
+</div>
+<h6 class="font-bold text-lg mb-2 relative z-10">Fakta Seru!</h6>
+<p class="text-sm opacity-90 leading-relaxed relative z-10">Cahaya bergerak secepat 300.000 kilometer per detik. Itu seperti mengelilingi dunia 7 kali dalam sekejap mata!</p>
+</div>
+</div>
+</div>
+<!-- Footer Quick Actions (Mobile/Tablet Only) -->
+<div class="lg:hidden mt-4 flex gap-2 overflow-x-auto pb-4 no-scrollbar">
+<button class="bg-white px-4 py-2 rounded-full border-2 border-outline-variant text-sm whitespace-nowrap font-label-md shadow-sm">Ulangi penjelasan</button>
+<button class="bg-white px-4 py-2 rounded-full border-2 border-outline-variant text-sm whitespace-nowrap font-label-md shadow-sm">Beri contoh lain</button>
+<button class="bg-white px-4 py-2 rounded-full border-2 border-outline-variant text-sm whitespace-nowrap font-label-md shadow-sm">Coba kuis singkat</button>
+</div>
+</div>
+</main>
+</div>
+<!-- Mobile Navigation Bar -->
+<div class="md:hidden fixed bottom-0 left-0 right-0 bg-surface/90 backdrop-blur-md border-t border-outline-variant/30 px-6 py-3 flex justify-between items-center z-50">
+<a class="flex flex-col items-center gap-1 text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="text-[10px] font-label-md">Beranda</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-secondary font-bold" href="#">
+<span class="material-symbols-outlined fill-icon">smart_toy</span>
+<span class="text-[10px] font-label-md">Mentor AI</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">book_2</span>
+<span class="text-[10px] font-label-md">Perpustakaan</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="text-[10px] font-label-md">Laporan</span>
+</a>
+</div>
+<script>
+        // Auto-expand textarea
+        const tx = document.getElementsByTagName("textarea");
+        for (let i = 0; i < tx.length; i++) {
+            tx[i].setAttribute("style", "height:" + (tx[i].scrollHeight) + "px;overflow-y:hidden;");
+            tx[i].addEventListener("input", OnInput, false);
+        }
+
+        function OnInput() {
+            this.style.height = "auto";
+            this.style.height = (this.scrollHeight) + "px";
+            if (this.scrollHeight > 150) {
+                this.style.overflowY = "auto";
+                this.style.height = "150px";
+            }
+        }
+
+        // Micro-interaction: Scroll to bottom of chat
+        const chatContainer = document.querySelector('.chat-scroll');
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+    </script>
+</body></html>

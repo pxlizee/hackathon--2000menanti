@@ -1,0 +1,447 @@
+<!DOCTYPE html><html lang="id"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Laporan - SOCRATES-GEMMA</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Be+Vietnam+Pro:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .squishy-btn:active {
+            transform: scale(0.95);
+        }
+        .chart-bar-animate {
+            animation: growUp 1s ease-out forwards;
+            transform-origin: bottom;
+        }
+        @keyframes growUp {
+            from { transform: scaleY(0); }
+            to { transform: scaleY(1); }
+        }
+        .float-slow {
+            animation: floating 4s ease-in-out infinite;
+        }
+        @keyframes floating {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-on-surface": "#f2f1ed",
+                        "on-secondary-container": "#003e73",
+                        "primary-fixed": "#ffdbc9",
+                        "on-background": "#1b1c1a",
+                        "on-primary": "#ffffff",
+                        "tertiary": "#006d41",
+                        "surface-tint": "#9a4600",
+                        "inverse-surface": "#2f312e",
+                        "error": "#ba1a1a",
+                        "on-primary-container": "#682d00",
+                        "secondary": "#0060ac",
+                        "surface-container": "#efeeea",
+                        "on-tertiary-container": "#00482a",
+                        "surface": "#faf9f5",
+                        "surface-container-high": "#e9e8e4",
+                        "primary": "#9a4600",
+                        "tertiary-fixed-dim": "#7adaa1",
+                        "on-secondary-fixed-variant": "#004883",
+                        "on-surface": "#1b1c1a",
+                        "on-error": "#ffffff",
+                        "secondary-fixed-dim": "#a4c9ff",
+                        "on-secondary": "#ffffff",
+                        "surface-variant": "#e3e2df",
+                        "on-tertiary": "#ffffff",
+                        "surface-bright": "#faf9f5",
+                        "secondary-container": "#68abff",
+                        "background": "#faf9f5",
+                        "on-surface-variant": "#564338",
+                        "on-primary-fixed": "#321200",
+                        "on-primary-fixed-variant": "#763300",
+                        "primary-container": "#ff8a3d",
+                        "surface-container-highest": "#e3e2df",
+                        "tertiary-container": "#5cbc86",
+                        "on-secondary-fixed": "#001c39",
+                        "on-error-container": "#93000a",
+                        "outline": "#8a7266",
+                        "inverse-primary": "#ffb68d",
+                        "secondary-fixed": "#d4e3ff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed-variant": "#005230",
+                        "surface-container-low": "#f4f4f0",
+                        "surface-dim": "#dbdad6",
+                        "on-tertiary-fixed": "#002110",
+                        "outline-variant": "#ddc1b3",
+                        "primary-fixed-dim": "#ffb68d",
+                        "tertiary-fixed": "#95f7bb",
+                        "error-container": "#ffdad6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "80px",
+                        "base": "8px",
+                        "xs": "4px",
+                        "gutter": "24px",
+                        "margin-desktop": "64px",
+                        "sm": "12px",
+                        "margin-mobile": "16px",
+                        "lg": "48px",
+                        "md": "24px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Be Vietnam Pro"],
+                        "label-md": ["Be Vietnam Pro"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "body-lg": ["Be Vietnam Pro"],
+                        "headline-sm": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md selection:bg-primary-fixed selection:text-on-primary-fixed">
+<div class="flex min-h-screen">
+<!-- SideNavBar - JSON Component 1 -->
+<aside class="hidden md:flex flex-col h-screen w-64 rounded-r-3xl bg-surface-container-low shadow-xl shadow-secondary/10 sticky left-0 top-0 overflow-y-auto py-md px-base z-50">
+<div class="mb-lg px-sm">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-2xl bg-primary-container flex items-center justify-center text-on-primary-container shadow-md">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary">ORION<div>CLASS</div></h1>
+<p class="font-label-md text-label-md text-on-surface-variant opacity-70">Petualangan Belajar</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 space-y-2">
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high rounded-full px-4 py-3 transition-colors hover:scale-105 duration-200" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-md text-label-md">Beranda</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high rounded-full px-4 py-3 transition-colors hover:scale-105 duration-200" href="#">
+<span class="material-symbols-outlined">smart_toy</span>
+<span class="font-label-md text-label-md">Mentor AI</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high rounded-full px-4 py-3 transition-colors hover:scale-105 duration-200" href="#">
+<span class="material-symbols-outlined">book_2</span>
+<span class="font-label-md text-label-md">Perpustakaan</span>
+</a>
+<!-- ACTIVE STATE: Laporan -->
+<a class="flex items-center gap-3 bg-secondary-container text-on-secondary-container rounded-full px-4 py-3 font-bold transition-all duration-150 ease-out active:scale-95" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">analytics</span>
+<span class="font-label-md text-label-md">Laporan</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high rounded-full px-4 py-3 transition-colors hover:scale-105 duration-200" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-md text-label-md">Pusat Bantuan</span>
+</a>
+</nav>
+<div class="mt-auto pt-lg border-t border-surface-variant/30 space-y-2">
+<button class="w-full bg-primary text-on-primary font-bold py-4 px-6 rounded-full shadow-lg shadow-primary/20 hover:scale-105 transition-all squishy-btn flex items-center justify-center gap-2 mb-4">
+<span class="">Mulai Belajar</span>
+</button>
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high rounded-full px-4 py-3 transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Pengaturan</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high rounded-full px-4 py-3 transition-colors" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-md text-label-md">Keluar</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 w-full relative">
+<!-- TopAppBar - JSON Component 2 -->
+<header class="flex justify-between items-center w-full px-gutter py-sm bg-surface/80 backdrop-blur-md sticky top-0 z-40">
+<div class="md:hidden">
+<span class="font-headline-lg text-headline-lg font-black text-primary">SG</span>
+</div>
+<div class="hidden md:block">
+<h2 class="font-headline-md text-headline-md text-primary font-bold">Laporan Belajarku</h2>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden sm:block">
+<input class="bg-surface-container-high border-none rounded-full py-2 px-6 focus:ring-2 focus:ring-primary text-body-md w-64" placeholder="Cari pencapaian..." type="text">
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+</div>
+<button class="w-10 h-10 rounded-full hover:bg-secondary-container/50 flex items-center justify-center transition-all active:translate-y-0.5">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="w-10 h-10 rounded-full hover:bg-secondary-container/50 flex items-center justify-center transition-all active:translate-y-0.5">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Dashboard Content -->
+<div class="p-gutter max-w-7xl mx-auto space-y-md">
+<!-- Welcome Section -->
+<section class="flex flex-col md:flex-row gap-md items-center bg-primary-fixed rounded-[32px] p-md md:p-lg relative overflow-hidden">
+<div class="absolute -top-10 -right-10 w-64 h-64 bg-primary-container rounded-full opacity-20 blur-3xl"></div>
+<div class="z-10 flex-1 space-y-sm">
+<span class="bg-primary text-on-primary px-4 py-1 rounded-full text-label-md font-bold uppercase tracking-wider">Luar Biasa!</span>
+<h1 class="font-display-lg text-display-lg text-on-primary-fixed">Kamu Semakin Cerdas, Budi!</h1>
+<p class="font-body-lg text-body-lg text-on-primary-fixed-variant max-w-lg">
+                            Minggu ini kamu telah menyelesaikan 12 misi petualangan dan menemukan 5 "Aha!" Moment. Ayo lihat seberapa jauh kamu melangkah!
+                        </p>
+</div>
+<div class="z-10 shrink-0 float-slow">
+<img class="w-48 h-48 md:w-64 md:h-64 object-contain" data-alt="A friendly, high-energy 3D cartoon character representing a young student celebrating with a gold star medal. The character has a cheerful expression and is rendered in a vibrant, tactile style that matches the joyful discovery theme. Soft blue lighting illuminates the scene, which features a background of floating colorful school supplies like pencils and books in a modern minimalist style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCO5ushkzAmlWU9y1JgWpc_UqHSbZzLwdTUm5WfihJ-EhjvA7eq79ThT8pz607Kz61nUGzPB7PPChNu0t1N0R3sowCGK_IrkDvb_p39Irny1yulsx2awHIt4nKg0FAzC2uSTVRLfMeiRUMVZVha1AKcqi0mAqfO452aGg0xGJS_GupHI9WtXx4hTvvv4r_dFsaSWpO1wJqR-Stq5Kroczp2KYqnKdIVjnl8LIqh9lnOy6fV03rInD9cUJRmeaAacXGSFFl_utAcLDo">
+</div>
+</section>
+<!-- Bento Grid Metrics -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-md">
+<!-- Weekly Progress Bar Chart -->
+<div class="md:col-span-8 bg-surface-container-lowest p-md rounded-[24px] border-2 border-outline-variant/30 shadow-sm">
+<div class="flex justify-between items-center mb-md">
+<h3 class="font-headline-sm text-headline-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">leaderboard</span>
+                                Waktu Belajar Mingguan
+                            </h3>
+<select class="bg-surface-container-low border-none rounded-full text-label-md py-1 px-4">
+<option>Minggu Ini</option>
+<option>Minggu Lalu</option>
+</select>
+</div>
+<div class="flex items-end justify-between h-48 px-md border-b-2 border-surface-variant pb-base">
+<div class="flex flex-col items-center gap-2 w-full group">
+<div class="bg-secondary-container w-8 rounded-t-lg group-hover:bg-secondary transition-all chart-bar-animate" style="height: 40%; animation-delay: 0s;"></div>
+<span class="text-label-md text-on-surface-variant">Sen</span>
+</div>
+<div class="flex flex-col items-center gap-2 w-full group">
+<div class="bg-secondary-container w-8 rounded-t-lg group-hover:bg-secondary transition-all chart-bar-animate" style="height: 65%; animation-delay: 0.1s;"></div>
+<span class="text-label-md text-on-surface-variant">Sel</span>
+</div>
+<div class="flex flex-col items-center gap-2 w-full group">
+<div class="bg-primary-container w-8 rounded-t-lg group-hover:bg-primary transition-all chart-bar-animate" style="height: 85%; animation-delay: 0.2s;"></div>
+<span class="text-label-md text-on-surface-variant">Rab</span>
+</div>
+<div class="flex flex-col items-center gap-2 w-full group">
+<div class="bg-secondary-container w-8 rounded-t-lg group-hover:bg-secondary transition-all chart-bar-animate" style="height: 50%; animation-delay: 0.3s;"></div>
+<span class="text-label-md text-on-surface-variant">Kam</span>
+</div>
+<div class="flex flex-col items-center gap-2 w-full group">
+<div class="bg-secondary-container w-8 rounded-t-lg group-hover:bg-secondary transition-all chart-bar-animate" style="height: 95%; animation-delay: 0.4s;"></div>
+<span class="text-label-md text-on-surface-variant">Jum</span>
+</div>
+<div class="flex flex-col items-center gap-2 w-full group">
+<div class="bg-tertiary-container w-8 rounded-t-lg group-hover:bg-tertiary transition-all chart-bar-animate" style="height: 30%; animation-delay: 0.5s;"></div>
+<span class="text-label-md text-on-surface-variant">Sab</span>
+</div>
+<div class="flex flex-col items-center gap-2 w-full group">
+<div class="bg-tertiary-container w-8 rounded-t-lg group-hover:bg-tertiary transition-all chart-bar-animate" style="height: 20%; animation-delay: 0.6s;"></div>
+<span class="text-label-md text-on-surface-variant">Min</span>
+</div>
+</div>
+</div>
+<!-- Key Stats Column -->
+<div class="md:col-span-4 space-y-md">
+<!-- Aha! Moments Card -->
+<div class="bg-tertiary-container text-on-tertiary-container p-md rounded-[24px] shadow-lg shadow-tertiary/10 flex items-center justify-between group cursor-pointer hover:translate-y-[-4px] transition-transform">
+<div>
+<p class="text-label-md font-bold uppercase tracking-wide opacity-80">Aha! Moments</p>
+<h4 class="text-[40px] font-bold leading-none">15</h4>
+<p class="text-label-md mt-1">Minggu ini +5!</p>
+</div>
+<div class="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center">
+<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">lightbulb</span>
+</div>
+</div>
+<!-- Streak Card -->
+<div class="bg-primary-container text-on-primary-container p-md rounded-[24px] shadow-lg shadow-primary/10 flex items-center justify-between group cursor-pointer hover:translate-y-[-4px] transition-transform">
+<div>
+<p class="text-label-md font-bold uppercase tracking-wide opacity-80">Streak Belajar</p>
+<h4 class="text-[40px] font-bold leading-none">7 Hari</h4>
+<p class="text-label-md mt-1">Rekormu: 12 hari</p>
+</div>
+<div class="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center">
+<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+</div>
+</div>
+</div>
+<!-- Radar Skill Map -->
+<div class="md:col-span-5 bg-surface-container-highest p-md rounded-[24px] flex flex-col justify-between overflow-hidden relative">
+<h3 class="font-headline-sm text-headline-sm mb-md">Kekuatan Supermu</h3>
+<div class="relative w-full aspect-square flex items-center justify-center">
+<!-- Simple SVG Visualization for Radar -->
+<svg class="w-full h-full max-w-[240px]" viewBox="0 0 200 200">
+<circle class="text-on-surface-variant/20" cx="100" cy="100" fill="none" r="80" stroke="currentColor" stroke-dasharray="4 4"></circle>
+<circle class="text-on-surface-variant/20" cx="100" cy="100" fill="none" r="50" stroke="currentColor" stroke-dasharray="4 4"></circle>
+<polygon class="text-secondary/10" fill="currentColor" points="100,20 160,60 180,140 100,180 20,140 40,60"></polygon>
+<polygon class="text-secondary" fill="none" points="100,40 150,75 140,130 100,160 50,140 60,80" stroke="currentColor" stroke-width="3"></polygon>
+<text class="text-[10px] font-bold fill-on-surface" text-anchor="middle" x="100" y="15">Logika</text>
+<text class="text-[10px] font-bold fill-on-surface" text-anchor="start" x="185" y="100">Bahasa</text>
+<text class="text-[10px] font-bold fill-on-surface" text-anchor="middle" x="100" y="195">Sains</text>
+<text class="text-[10px] font-bold fill-on-surface" text-anchor="end" x="15" y="100">Kreatif</text>
+</svg>
+</div>
+<p class="text-body-md text-on-surface-variant mt-md text-center">Wah, kemampuan <b>Logika</b> kamu sangat menonjol hari ini!</p>
+</div>
+<!-- Aha! Moment Timeline -->
+<div class="md:col-span-7 bg-surface-container-lowest p-md rounded-[24px] border-2 border-outline-variant/30">
+<h3 class="font-headline-sm text-headline-sm mb-md flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">auto_awesome</span>
+                            Timeline "Aha!" Kamu
+                        </h3>
+<div class="space-y-md">
+<div class="flex gap-md items-start p-sm hover:bg-surface-container rounded-2xl transition-all">
+<div class="w-12 h-12 shrink-0 bg-secondary-fixed rounded-full flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">calculate</span>
+</div>
+<div>
+<h4 class="font-headline-sm text-[18px]">Memahami Pecahan</h4>
+<p class="text-body-md text-on-surface-variant">"Akhirnya aku tahu kenapa pizza dipotong-potong itu pecahan!"</p>
+<span class="text-label-md text-primary mt-base block">Kemarin • Mentor AI: Gemma</span>
+</div>
+</div>
+<div class="flex gap-md items-start p-sm hover:bg-surface-container rounded-2xl transition-all">
+<div class="w-12 h-12 shrink-0 bg-tertiary-fixed rounded-full flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined">psychology</span>
+</div>
+<div>
+<h4 class="font-headline-sm text-[18px]">Misteri Tata Surya</h4>
+<p class="text-body-md text-on-surface-variant">"Planet Jupiter ternyata tidak punya tanah padat untuk diinjak!"</p>
+<span class="text-label-md text-primary mt-base block">3 hari yang lalu • Mentor AI: Socrates</span>
+</div>
+</div>
+<div class="flex gap-md items-start p-sm hover:bg-surface-container rounded-2xl transition-all">
+<div class="w-12 h-12 shrink-0 bg-primary-fixed rounded-full flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">history_edu</span>
+</div>
+<div>
+<h4 class="font-headline-sm text-[18px]">Seni Pantun</h4>
+<p class="text-body-md text-on-surface-variant">"Membuat rima itu seperti bermain teka-teki musik!"</p>
+<span class="text-label-md text-primary mt-base block">Minggu lalu • Mentor AI: Gemma</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Rewards Section -->
+<section class="bg-surface-container p-md md:p-lg rounded-[32px] mt-lg">
+<div class="flex justify-between items-center mb-md">
+<div>
+<h3 class="font-headline-md text-headline-md">Lencana Baru</h3>
+<p class="text-body-md text-on-surface-variant">Terus kumpulkan untuk membuka petualangan baru!</p>
+</div>
+<button class="text-primary font-bold hover:underline flex items-center gap-1">
+                            Lihat Semua <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 gap-md">
+<div class="flex flex-col items-center gap-2 group">
+<div class="w-20 h-20 bg-white rounded-full p-2 shadow-md group-hover:rotate-12 transition-transform">
+<img class="w-full h-full object-contain" data-alt="A colorful digital badge icon for a student application, featuring a smiling robot face surrounded by a bright golden gear. The style is modern, bubbly, and tactile with soft 3D shading. The color scheme uses vibrant sunset orange and sky blue, looking like a physical collectible sticker with a slight metallic sheen. The background is a clean white to make the badge pop." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDj5Zs228B6cJl3dBpJ3IxAyp3gh_Y0ZPRF2xyevJjJE0wzwazol3tTD9b_d-hG169CUe2MHYlAKVbXEA9CZAot5Qy9IOl2tnKLcOlGNLQgIpxcvu7GZImbR7bNApNvZDImyrzp9eG4ma0-DxlauLz5xyEcOCLh186_qtef-GD_vcVq-Zva65kTVKBO_-ww34bRSfRxLcab0zM3ouM_n_lZHjydoJscb2whLDMKdMKHc7Z-PM1wiqGo14IMooW0kQNTQV44LUKbPeI">
+</div>
+<span class="text-label-md font-bold text-center">Penjelajah AI</span>
+</div>
+<div class="flex flex-col items-center gap-2 group opacity-100">
+<div class="w-20 h-20 bg-white rounded-full p-2 shadow-md group-hover:rotate-12 transition-transform">
+<img class="w-full h-full object-contain" data-alt="A playful digital reward badge icon showing a stack of three glowing books with a small sprout growing out of the top one. The books are colored in soft tertiary greens and secondary blues. The style is whimsical and friendly, suitable for a children's learning app, with smooth rounded edges and a cheerful, optimistic vibe. High saturation accents emphasize success." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxVjsPupd0C3RmUmSTV_hhkWmyVRZtZhBXcQWTeljtfOtSw02jn2kmR5vf0eJmH7zGe3TJJBqtALyGqe4TcR_5jrGQBJqUV5YsQKaqp-aq6OBUcx80oylF0nvzNdgfOCS_Rh63d4EsHjDgA5NHJGPc6Q6OPvdX4Ws-012-K45l95BeNH_sFXJjmqsnkUnhXWW38KcpSbkLXYqZVSLCiHYaDNbHR_BIkFiwGLEaV-WUl9oyjOYNMmMYoGEmUbvNbiRKP4RQgHt8i4A">
+</div>
+<span class="text-label-md font-bold text-center">Kutu Buku Cilik</span>
+</div>
+<div class="flex flex-col items-center gap-2 group opacity-40 grayscale">
+<div class="w-20 h-20 bg-white rounded-full p-2 shadow-md flex items-center justify-center">
+<span class="material-symbols-outlined text-4xl text-on-surface-variant">lock</span>
+</div>
+<span class="text-label-md font-bold text-center">Master Sains</span>
+</div>
+<div class="flex flex-col items-center gap-2 group opacity-40 grayscale">
+<div class="w-20 h-20 bg-white rounded-full p-2 shadow-md flex items-center justify-center">
+<span class="material-symbols-outlined text-4xl text-on-surface-variant">lock</span>
+</div>
+<span class="text-label-md font-bold text-center">Raja Matematika</span>
+</div>
+<div class="flex flex-col items-center gap-2 group opacity-40 grayscale">
+<div class="w-20 h-20 bg-white rounded-full p-2 shadow-md flex items-center justify-center">
+<span class="material-symbols-outlined text-4xl text-on-surface-variant">lock</span>
+</div>
+<span class="text-label-md font-bold text-center">Penyair Cilik</span>
+</div>
+</div>
+</section>
+<!-- Recommendation CTA -->
+<div class="bg-secondary text-on-secondary p-md rounded-[24px] flex flex-col md:flex-row justify-between items-center gap-md">
+<div class="flex gap-md items-center">
+<div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-3xl">rocket_launch</span>
+</div>
+<div>
+<h4 class="font-headline-sm">Siap untuk tantangan berikutnya?</h4>
+<p class="text-body-md opacity-90">Berdasarkan laporanmu, kamu sudah siap belajar <b>Astronomi Dasar</b>!</p>
+</div>
+</div>
+<button class="bg-white text-secondary font-bold px-8 py-3 rounded-full hover:scale-105 transition-all squishy-btn">
+                        Mulai Tantangan
+                    </button>
+</div>
+</div>
+<!-- Footer Spacing for Mobile -->
+<div class="h-24 md:hidden"></div>
+</main>
+<!-- BottomNavBar for Mobile -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 bg-surface/90 backdrop-blur-lg flex justify-around items-center py-sm border-t border-surface-variant/20 z-50 px-base">
+<a class="flex flex-col items-center gap-1 text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="text-[10px] font-bold">Beranda</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">smart_toy</span>
+<span class="text-[10px] font-bold">Mentor AI</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">analytics</span>
+<span class="text-[10px] font-bold">Laporan</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">account_circle</span>
+<span class="text-[10px] font-bold">Profil</span>
+</a>
+</nav>
+</div>
+<!-- Floating Action Button (FAB) - Suppressed per rule since this is a Details/Report screen -->
+<!-- (Intent: Contextual FAB Suppression logic applied) -->
+<script>
+        // Simple micro-interaction for the radar map and charts
+        document.addEventListener('DOMContentLoaded', () => {
+            const bars = document.querySelectorAll('.chart-bar-animate');
+            bars.forEach((bar, index) => {
+                bar.style.animationDelay = `${index * 0.1}s`;
+            });
+        });
+    </script>
+
+
+
+</body></html>

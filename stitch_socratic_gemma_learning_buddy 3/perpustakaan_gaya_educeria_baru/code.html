@@ -1,0 +1,453 @@
+<!DOCTYPE html><html class="light" lang="id"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Perpustakaan - SOCRATES-GEMMA</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Be+Vietnam+Pro:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .filled-icon {
+            font-variation-settings: 'FILL' 1;
+        }
+        .card-hover-effect {
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .card-hover-effect:hover {
+            transform: translateY(-8px) scale(1.02);
+        }
+        /* Custom 3D button effect as per Style Guidance */
+        .btn-primary-3d {
+            box-shadow: 0 4px 0 #763300;
+        }
+        .btn-primary-3d:active {
+            box-shadow: 0 0px 0 #763300;
+            transform: translateY(4px);
+        }
+        /* Tonal stacking and soft shadows from Style Guidance */
+        .soft-elevation {
+            box-shadow: 0 16px 32px -8px rgba(0, 96, 172, 0.08);
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "inverse-on-surface": "#f2f1ed",
+                      "on-secondary-container": "#003e73",
+                      "primary-fixed": "#ffdbc9",
+                      "on-background": "#1b1c1a",
+                      "on-primary": "#ffffff",
+                      "tertiary": "#006d41",
+                      "surface-tint": "#9a4600",
+                      "inverse-surface": "#2f312e",
+                      "error": "#ba1a1a",
+                      "on-primary-container": "#682d00",
+                      "secondary": "#0060ac",
+                      "surface-container": "#efeeea",
+                      "on-tertiary-container": "#00482a",
+                      "surface": "#faf9f5",
+                      "surface-container-high": "#e9e8e4",
+                      "primary": "#9a4600",
+                      "tertiary-fixed-dim": "#7adaa1",
+                      "on-secondary-fixed-variant": "#004883",
+                      "on-surface": "#1b1c1a",
+                      "on-error": "#ffffff",
+                      "secondary-fixed-dim": "#a4c9ff",
+                      "on-secondary": "#ffffff",
+                      "surface-variant": "#e3e2df",
+                      "on-tertiary": "#ffffff",
+                      "surface-bright": "#faf9f5",
+                      "secondary-container": "#68abff",
+                      "background": "#faf9f5",
+                      "on-surface-variant": "#564338",
+                      "on-primary-fixed": "#321200",
+                      "on-primary-fixed-variant": "#763300",
+                      "primary-container": "#ff8a3d",
+                      "surface-container-highest": "#e3e2df",
+                      "tertiary-container": "#5cbc86",
+                      "on-secondary-fixed": "#001c39",
+                      "on-error-container": "#93000a",
+                      "outline": "#8a7266",
+                      "inverse-primary": "#ffb68d",
+                      "secondary-fixed": "#d4e3ff",
+                      "surface-container-lowest": "#ffffff",
+                      "on-tertiary-fixed-variant": "#005230",
+                      "surface-container-low": "#f4f4f0",
+                      "surface-dim": "#dbdad6",
+                      "on-tertiary-fixed": "#002110",
+                      "outline-variant": "#ddc1b3",
+                      "primary-fixed-dim": "#ffb68d",
+                      "tertiary-fixed": "#95f7bb",
+                      "error-container": "#ffdad6"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "xl": "80px",
+                      "base": "8px",
+                      "xs": "4px",
+                      "gutter": "24px",
+                      "margin-desktop": "64px",
+                      "sm": "12px",
+                      "margin-mobile": "16px",
+                      "lg": "48px",
+                      "md": "24px"
+              },
+              "fontFamily": {
+                      "body-md": ["Be Vietnam Pro"],
+                      "label-md": ["Be Vietnam Pro"],
+                      "headline-lg": ["Plus Jakarta Sans"],
+                      "headline-md": ["Plus Jakarta Sans"],
+                      "body-lg": ["Be Vietnam Pro"],
+                      "headline-sm": ["Plus Jakarta Sans"],
+                      "display-lg": ["Plus Jakarta Sans"],
+                      "headline-lg-mobile": ["Plus Jakarta Sans"]
+              },
+              "fontSize": {
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                      "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex">
+<!-- SideNavBar (Shared Component) -->
+<aside class="flex flex-col h-full py-md px-base sticky left-0 top-0 overflow-y-auto h-screen w-64 rounded-r-3xl bg-surface-container-low dark:bg-inverse-surface shadow-xl shadow-secondary/10 shrink-0 z-50">
+<div class="flex flex-col gap-2 mb-lg px-4">
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-container">ORION<div>CLASS</div></h1>
+<p class="font-label-md text-label-md text-on-surface-variant">Petualangan Belajar</p>
+</div>
+<nav class="flex flex-col gap-2 flex-grow">
+<!-- Active state mapping for "Perpustakaan" -->
+<a class="flex items-center gap-3 text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-variant/10 rounded-full px-4 py-3 transition-colors hover:scale-105 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-md text-label-md">Beranda</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-variant/10 rounded-full px-4 py-3 transition-colors hover:scale-105 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="smart_toy">smart_toy</span>
+<span class="font-label-md text-label-md">Mentor AI</span>
+</a>
+<a class="flex items-center gap-3 bg-secondary-container dark:bg-on-secondary-fixed-variant text-on-secondary-container dark:text-secondary-fixed rounded-full px-4 py-3 font-bold hover:scale-105 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined filled-icon" data-icon="book_2">book_2</span>
+<span class="font-label-md text-label-md">Perpustakaan</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-variant/10 rounded-full px-4 py-3 transition-colors hover:scale-105 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="font-label-md text-label-md">Laporan</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-variant/10 rounded-full px-4 py-3 transition-colors hover:scale-105 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="font-label-md text-label-md">Pusat Bantuan</span>
+</a>
+<div class="mt-8 px-4">
+<button class="w-full bg-primary text-on-primary font-bold py-3 px-6 rounded-full btn-primary-3d hover:scale-105 transition-all text-label-md">Mulai Belajar</button>
+</div>
+</nav>
+<div class="mt-auto pt-lg border-t border-surface-variant/30 flex flex-col gap-2">
+<a class="flex items-center gap-3 text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-variant/10 rounded-full px-4 py-3 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-md text-label-md">Pengaturan</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-variant/10 rounded-full px-4 py-3 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-label-md text-label-md">Keluar</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-grow flex flex-col min-w-0">
+<!-- TopAppBar (Shared Component) -->
+<header class="flex justify-between items-center w-full px-gutter py-sm bg-surface/80 backdrop-blur-md sticky top-0 z-40">
+<div class="flex items-center gap-4">
+<h2 class="font-headline-lg text-headline-lg font-black text-primary">Perpustakaan</h2>
+</div>
+<div class="flex items-center gap-md">
+<div class="hidden md:flex items-center bg-surface-container rounded-full px-4 py-2 w-64 lg:w-96">
+<span class="material-symbols-outlined text-on-surface-variant mr-2" data-icon="search">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-body-md w-full placeholder-on-surface-variant/60" placeholder="Cari petualangan..." type="text">
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 hover:bg-secondary-container/50 rounded-full transition-all text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="flex items-center gap-2 p-1 pr-4 hover:bg-secondary-container/50 rounded-full transition-all text-on-surface-variant">
+<span class="material-symbols-outlined text-4xl" data-icon="account_circle">account_circle</span>
+<span class="font-label-md text-label-md hidden lg:inline">Adit Pratama</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Content Area -->
+<div class="px-gutter py-md max-w-[1400px] mx-auto w-full">
+<!-- Hero Banner -->
+<section class="relative rounded-[32px] overflow-hidden mb-lg bg-secondary text-on-secondary p-lg flex flex-col md:flex-row items-center justify-between gap-md soft-elevation">
+<div class="absolute inset-0 opacity-10 pointer-events-none">
+
+</div>
+<div class="relative z-10 flex-1 space-y-4">
+<span class="bg-white/20 text-white font-label-md text-label-md px-4 py-1 rounded-full uppercase tracking-wider">Modul Terbaru</span>
+<h1 class="font-display-lg text-display-lg">Halo, Petualang!</h1>
+<p class="font-body-lg text-body-lg text-white/90 max-w-lg">Lanjutkan perjalanan belajarmu hari ini. Kamu sudah menyelesaikan 65% dari tantangan pekan ini!</p>
+<button class="bg-primary-container text-on-primary-container font-bold py-3 px-8 rounded-full btn-primary-3d hover:scale-105 transition-all text-label-md mt-4">
+                        Lanjut Belajar
+                    </button>
+</div>
+<div class="relative z-10 w-full md:w-1/3 aspect-square max-w-[300px]">
+<img class="w-full h-full object-contain" data-alt="A whimsical 3D illustration of a friendly orange robot mentor and a child sitting among giant floating colorful books and glowing geometric shapes. The art style is soft-shaded, modern tactile, with vibrant orange and blue accents in a clean white-space environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAH3NvvvJT1BD-vA2rl4aPqX97Lc3TDhdZ4GGCpGO86MQYtK4KX_itTVA4Q0p3LyyMQpC51tkgYZYL2DpMKWGJ4iXQiaZBJrAtCQi2QKvJkFcBzLH5DZfoldWfty8kSU_4_TapkaU0CaLYacARA6PwleWssTKtEfuhTaJN8lLMI3B19zMk0CactiwQXtQkU3ceFVW2W5oIMa9Z-iIDrYrAhb0JEZ8bZaIYdAtTlUGalHeTkHpfh-CcBtTlSwcyqFrQyy3f4dUwz8JY">
+</div>
+</section>
+<!-- Category Filters -->
+<div class="flex gap-4 overflow-x-auto pb-4 mb-md hide-scrollbar">
+<button class="px-6 py-3 rounded-full bg-primary text-on-primary font-bold whitespace-nowrap shadow-md flex items-center gap-2">
+<span class="material-symbols-outlined filled-icon" data-icon="grid_view">grid_view</span> Semua
+                </button>
+<button class="px-6 py-3 rounded-full bg-surface-container-high text-on-surface-variant font-medium whitespace-nowrap hover:bg-surface-variant transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined" data-icon="translate">translate</span> Bahasa
+                </button>
+<button class="px-6 py-3 rounded-full bg-surface-container-high text-on-surface-variant font-medium whitespace-nowrap hover:bg-surface-variant transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined" data-icon="biotech">biotech</span> Sains
+                </button>
+<button class="px-6 py-3 rounded-full bg-surface-container-high text-on-surface-variant font-medium whitespace-nowrap hover:bg-surface-variant transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined" data-icon="functions">functions</span> Matematika
+                </button>
+<button class="px-6 py-3 rounded-full bg-surface-container-high text-on-surface-variant font-medium whitespace-nowrap hover:bg-surface-variant transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined" data-icon="history_edu">history_edu</span> Sastra
+                </button>
+</div>
+<!-- Bento Grid Layout for Modules -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-md">
+<!-- Card 1: Math (High Contrast) -->
+<article class="group relative bg-white rounded-3xl overflow-hidden soft-elevation card-hover-effect flex flex-col border-2 border-surface-container">
+<div class="h-48 relative overflow-hidden bg-secondary-container/20">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Educational 3D cartoon style illustration for a mathematics lesson. Colorful geometric shapes like cubes, spheres, and pyramids are floating in a bright, clean space. The primary colors are vibrant sky blue and sunset orange. High quality digital render." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjnqW1p_Sf8xWkw3hUZfRylmXwn8s4fxYxQthxozaxNgCGG1qihpJOi__8YVyapSjk2E9k2TI3KJjzOvrP3w6Yzxgh03gIuWCk9MMIo4ru0-sTGpRuNVLZXdS2Eln3xNzaITuIppGdKoOoWMLaclxeqNY9n37pzw6N7o4KvYitRUnnfUMxKBVV5vV5yi6bzZmT__T1IoiUQ0LJA-GBcIukvlOkkn6-sMrfbdpUBLave0AcaL-rPo_GoFQMKCy3pDQgeq6znO1WYcs">
+<div class="absolute top-4 left-4 bg-secondary text-on-secondary px-3 py-1 rounded-xl text-label-md font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px] filled-icon" data-icon="functions">functions</span> Matematika
+                        </div>
+</div>
+<div class="p-md flex-grow flex flex-col">
+<h3 class="font-headline-sm text-headline-sm mb-2 text-on-surface">Petualangan Angka Ajaib</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-2">Jelajahi dunia perkalian melalui tantangan interaktif di pulau misterius.</p>
+<div class="mt-auto">
+<div class="flex justify-between items-center mb-2">
+<span class="font-label-md text-label-md text-on-surface-variant">Kemajuan: 80%</span>
+<span class="font-label-md text-label-md text-primary font-bold">Lanjutkan</span>
+</div>
+<div class="w-full bg-surface-container-high h-3 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 80%"></div>
+</div>
+</div>
+</div>
+</article>
+<!-- Card 2: Science (Asymmetric focus) -->
+<article class="group relative bg-white rounded-3xl overflow-hidden soft-elevation card-hover-effect flex flex-col border-2 border-surface-container">
+<div class="h-48 relative overflow-hidden bg-tertiary-container/20">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Professional scientific 3D illustration for kids showing a colorful solar system with a friendly-looking Earth, Mars, and Jupiter. Soft glowing light effects, cosmic purple and blue background with bright stars. Modern tactile educational style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuClpMLT8mCesO9TZbbPavPseo5cC4Ne_I9km7IGLZyjya4nZ9U5LfM6PUTk_cYCPoVWTpHWoeC5lkJqkzBFXY1E6kMIVADctGSXrJPVBx_QxsUmDmYb97XY7AFoRvJ6JqrGyt0c6fpryrMULizU8dbG6UgpOAJyFW-NoCBetg3VUsQCiilmvM6E9x4_SsERhFRJ58jzHy6C8ojW8td8eD2x27usj-vKLflXMYzTq-Gj607G4l1AvuXnwc8azHtK--IGaW3fCMD7QCg">
+<div class="absolute top-4 left-4 bg-tertiary text-on-tertiary px-3 py-1 rounded-xl text-label-md font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px] filled-icon" data-icon="rocket_launch">rocket_launch</span> Sains
+                        </div>
+</div>
+<div class="p-md flex-grow flex flex-col">
+<h3 class="font-headline-sm text-headline-sm mb-2 text-on-surface">Rahasia Tata Surya</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-2">Terbanglah melintasi planet dan pelajari mengapa setiap dunia itu unik!</p>
+<div class="mt-auto">
+<div class="flex justify-between items-center mb-2">
+<span class="font-label-md text-label-md text-on-surface-variant">Kemajuan: 15%</span>
+<span class="font-label-md text-label-md text-primary font-bold">Baru Mulai</span>
+</div>
+<div class="w-full bg-surface-container-high h-3 rounded-full overflow-hidden">
+<div class="bg-tertiary h-full rounded-full" style="width: 15%"></div>
+</div>
+</div>
+</div>
+</article>
+<!-- Card 3: Language -->
+<article class="group relative bg-white rounded-3xl overflow-hidden soft-elevation card-hover-effect flex flex-col border-2 border-surface-container">
+<div class="h-48 relative overflow-hidden bg-primary-container/10">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A vibrant 3D book bursting with glowing letters and words in different languages. Symbols of communication like speech bubbles and quills float around the book in a soft-lit, airy environment. Cheerful and educational atmosphere with sunset orange tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuArSBnpujhfr3N4-DY3clCPRVC1_hXOL9t_RaEAZ3Qd3SLHWDLXozGqxxh_nCUnLbMEBwpReyaFYmtayLM5yJ2wvfyqnAZkgURnR3gcDDI-ltxN4zODMqf953bMdLas1Ftj-tj3e2vP0yUSous18a6Nbj886wE_iqmdnb-kNEIV4eh-z0sqr0faAaZ4KhHJAYNjz1NrOTIs51gw7jelAjI6cKCsmT9UOVlGT3HP6z003xH_2dNKovkcap8EKcVTF7Wl0YFEDAUFbpY">
+<div class="absolute top-4 left-4 bg-primary text-on-primary px-3 py-1 rounded-xl text-label-md font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px] filled-icon" data-icon="translate">translate</span> Bahasa
+                        </div>
+</div>
+<div class="p-md flex-grow flex flex-col">
+<h3 class="font-headline-sm text-headline-sm mb-2 text-on-surface">Pahlawan Kosakata</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-2">Bantu warga kota menemukan kata-kata yang hilang dan tingkatkan bahasamu.</p>
+<div class="mt-auto">
+<div class="flex justify-between items-center mb-2">
+<span class="font-label-md text-label-md text-on-surface-variant">Kemajuan: 100%</span>
+<span class="font-label-md text-label-md text-tertiary font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] filled-icon" data-icon="check_circle">check_circle</span> Selesai
+                                </span>
+</div>
+<div class="w-full bg-surface-container-high h-3 rounded-full overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 100%"></div>
+</div>
+</div>
+</div>
+</article>
+<!-- Card 4: New Featured -->
+<article class="group relative bg-white rounded-3xl overflow-hidden soft-elevation card-hover-effect flex flex-col border-2 border-primary/20 ring-4 ring-primary/5">
+<div class="h-48 relative overflow-hidden bg-surface-container-highest">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Close-up of a high-tech garden with bioluminescent plants and futuristic water systems. 3D isometric educational style. Warm natural lighting mixed with soft blue neon glow. Designed for a science and technology module for children." src="https://lh3.googleusercontent.com/aida-public/AB6AXuChepRKL1U7HTrO115r5P5_u7woTKJ4PQeuS6xcaJkNedLG7FgD2Zacbq1V1s8rS4Wzw0QCVdO1eWkuhEgQPd7dFcWrvtUMY6n-bZeLH0oDqznC4-2JJMLnyBUOJHGRhFDzkvPlW6_DnOZwMq4JGfLnpAn5dG0VptPyBx246EoKeL-QPepAc0oJpyeQas8ewRejQmsS62fkd93LelfCo8Gqqa4_-kCdMio2Qrh548eCbvTNfz0GiP2lhPgDNYk96FrtmxMNrcyPXag">
+<div class="absolute top-4 left-4 bg-primary-container text-on-primary-container px-3 py-1 rounded-xl text-label-md font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px] filled-icon" data-icon="star">star</span> Unggulan
+                        </div>
+</div>
+<div class="p-md flex-grow flex flex-col">
+<h3 class="font-headline-sm text-headline-sm mb-2 text-on-surface">Ekosistem Digital</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-2">Bagaimana teknologi membantu alam? Temukan jawabannya di sini!</p>
+<div class="mt-auto">
+<button class="w-full bg-secondary text-on-secondary font-bold py-2 rounded-full hover:bg-on-secondary-fixed-variant transition-colors text-label-md">
+                                Mulai Sekarang
+                            </button>
+</div>
+</div>
+</article>
+<!-- Additional Grid items for richness -->
+<!-- Science Module 2 -->
+<article class="group relative bg-white rounded-3xl overflow-hidden soft-elevation card-hover-effect flex flex-col border-2 border-surface-container">
+<div class="h-48 relative overflow-hidden bg-tertiary-container/20">
+<img class="w-full h-full object-cover" data-alt="Fun cartoon 3D representation of microscopic life and DNA helices. Bright greens and teals, friendly smiling cellular characters. Educational science theme for elementary students. Modern soft 3D rendering." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBB8paBQhr7aBCbqQ0FrEu9ss9kbxyewuhiTMPrL4qqee6JroB1Im_M7vsyNungPvofBPxIRlgBv56CplBOdH_dNDyAogL4x8bDeREiH7NT6gP3fdHK8S37bHCm3nn5g4zHvyGRpLIyltnFy9qAtreIvJwoQcrfu7DOW6B-TscGZTXJaktNXeMdNzcft3x0MEzz9NxbixEIW9V4SNP3486-b6fHdxlXfWaa9tKN0_lH6oceHG0ACnPLyFCMhF-YpiLFzH2KZW7G7YE">
+<div class="absolute top-4 left-4 bg-tertiary text-on-tertiary px-3 py-1 rounded-xl text-label-md font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]" data-icon="microscope">microscope</span> Biologi
+                        </div>
+</div>
+<div class="p-md flex-grow flex flex-col">
+<h3 class="font-headline-sm text-headline-sm mb-2 text-on-surface">Dunia Mikroskopis</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-2">Lihat benda-benda terkecil yang membangun seluruh kehidupan.</p>
+<div class="mt-auto flex justify-between items-center">
+<span class="text-on-surface-variant font-label-md flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]" data-icon="schedule">schedule</span> 45 Menit
+                            </span>
+<button class="p-2 bg-surface-container rounded-full text-primary hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined" data-icon="bookmark">bookmark</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Math Module 2 -->
+<article class="group relative bg-white rounded-3xl overflow-hidden soft-elevation card-hover-effect flex flex-col border-2 border-surface-container">
+<div class="h-48 relative overflow-hidden bg-secondary-container/20">
+<img class="w-full h-full object-cover" data-alt="Interactive 3D geometry scene with floating prisms, spheres, and measurements. Clean minimalist background with soft blue accents. Designed for kids math learning." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDyf5FdY_maaPS0SwLhGVh3awKVtzQ5PYqVDGixldCxQTF2-m7r4CgNL3zg_hi-hqAumFFMJCyYYOmVNY2pLIko-kD7TGGNg_kaK5kcbNDuU7eeVrtFR0jiTEXxke397xNipMysm1cgEIfnt8A9vm-ER4uc_NFhxh5zc7CK3yNXq6IPzcgF9ydKi3Gz6tlg8aJDeWuMEpKpKwCtTxjXj5ysIsvr92dV-XuP7ob8CLEpzBsyQARvIPTAr6Lyan9Z-E3ziZMlW6kiaWo">
+<div class="absolute top-4 left-4 bg-secondary text-on-secondary px-3 py-1 rounded-xl text-label-md font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]" data-icon="shape_line">shape_line</span> Geometri
+                        </div>
+</div>
+<div class="p-md flex-grow flex flex-col">
+<h3 class="font-headline-sm text-headline-sm mb-2 text-on-surface">Bangun Ruang Ajaib</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-2">Bentuk-bentuk di sekitarmu punya rahasia. Ayo kita bongkar!</p>
+<div class="mt-auto flex justify-between items-center">
+<span class="text-on-surface-variant font-label-md flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]" data-icon="local_fire_department">local_fire_department</span> Populer
+                            </span>
+<button class="p-2 bg-surface-container rounded-full text-primary hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined" data-icon="play_arrow">play_arrow</span>
+</button>
+</div>
+</div>
+</article>
+</div>
+<!-- Library Summary / Achievements Section -->
+<section class="mt-xl grid grid-cols-1 lg:grid-cols-3 gap-md">
+<div class="lg:col-span-2 bg-surface-container-low rounded-[32px] p-lg border-2 border-surface-container">
+<h2 class="font-headline-md text-headline-md mb-md">Pencapaian Belajarmu</h2>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+<div class="bg-white p-4 rounded-2xl text-center soft-elevation">
+<div class="w-12 h-12 bg-primary/10 text-primary rounded-full flex items-center justify-center mx-auto mb-2">
+<span class="material-symbols-outlined filled-icon" data-icon="auto_awesome">auto_awesome</span>
+</div>
+<div class="font-headline-sm text-headline-sm text-primary">12</div>
+<div class="font-label-md text-label-md text-on-surface-variant">Modul Selesai</div>
+</div>
+<div class="bg-white p-4 rounded-2xl text-center soft-elevation">
+<div class="w-12 h-12 bg-secondary/10 text-secondary rounded-full flex items-center justify-center mx-auto mb-2">
+<span class="material-symbols-outlined filled-icon" data-icon="timer">timer</span>
+</div>
+<div class="font-headline-sm text-headline-sm text-secondary">24j</div>
+<div class="font-label-md text-label-md text-on-surface-variant">Waktu Belajar</div>
+</div>
+<div class="bg-white p-4 rounded-2xl text-center soft-elevation">
+<div class="w-12 h-12 bg-tertiary/10 text-tertiary rounded-full flex items-center justify-center mx-auto mb-2">
+<span class="material-symbols-outlined filled-icon" data-icon="emoji_events">emoji_events</span>
+</div>
+<div class="font-headline-sm text-headline-sm text-tertiary">5</div>
+<div class="font-label-md text-label-md text-on-surface-variant">Medali Emas</div>
+</div>
+<div class="bg-white p-4 rounded-2xl text-center soft-elevation">
+<div class="w-12 h-12 bg-primary-container/20 text-on-primary-container rounded-full flex items-center justify-center mx-auto mb-2">
+<span class="material-symbols-outlined filled-icon" data-icon="local_fire_department">local_fire_department</span>
+</div>
+<div class="font-headline-sm text-headline-sm text-primary-container">7</div>
+<div class="font-label-md text-label-md text-on-surface-variant">Hari Beruntun</div>
+</div>
+</div>
+</div>
+<div class="bg-secondary rounded-[32px] p-lg text-on-secondary flex flex-col justify-center items-center text-center relative overflow-hidden">
+<div class="absolute -right-10 -bottom-10 opacity-20 transform rotate-12">
+<span class="material-symbols-outlined text-[200px]" data-icon="school">school</span>
+</div>
+<span class="material-symbols-outlined text-5xl mb-4 filled-icon" data-icon="psychology_alt">psychology_alt</span>
+<h3 class="font-headline-md text-headline-md mb-2">Butuh Bantuan?</h3>
+<p class="font-body-md text-body-md mb-6 opacity-90">Tanyakan apa saja kepada Mentor AI SOCRATES-GEMMA!</p>
+<button class="bg-white text-secondary font-bold py-3 px-8 rounded-full hover:scale-105 transition-transform">
+                        Chat Sekarang
+                    </button>
+</div>
+</section>
+</div>
+<!-- Footer Padding -->
+<footer class="h-24"></footer>
+</main>
+<!-- FAB (Contextual for Home/Dashboard/Library) -->
+<button class="fixed bottom-8 right-8 w-16 h-16 bg-primary text-on-primary rounded-full shadow-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all z-50 group btn-primary-3d">
+<span class="material-symbols-outlined text-3xl" data-icon="smart_toy">smart_toy</span>
+<span class="absolute right-20 bg-white text-primary px-4 py-2 rounded-xl shadow-lg font-bold opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Tanya SOCRATES</span>
+</button>
+<script>
+        // Simple micro-interactions
+        document.querySelectorAll('.card-hover-effect').forEach(card => {
+            card.addEventListener('mousedown', () => {
+                card.style.transform = 'translateY(-4px) scale(0.98)';
+            });
+            card.addEventListener('mouseup', () => {
+                card.style.transform = 'translateY(-8px) scale(1.02)';
+            });
+        });
+
+        // Search bar interaction
+        const searchInput = document.querySelector('input[type="text"]');
+        const searchContainer = searchInput.parentElement;
+        searchInput.addEventListener('focus', () => {
+            searchContainer.classList.add('ring-2', 'ring-primary/30', 'bg-white');
+        });
+        searchInput.addEventListener('blur', () => {
+            searchContainer.classList.remove('ring-2', 'ring-primary/30', 'bg-white');
+        });
+    </script>
+
+
+
+</body></html>

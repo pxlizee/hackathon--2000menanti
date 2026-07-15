@@ -1,0 +1,367 @@
+<!DOCTYPE html><html class="light" lang="id" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Mentor AI - SOCRATES-GEMMA</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Be+Vietnam+Pro:wght@400;500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .fill-icon {
+            font-variation-settings: 'FILL' 1;
+        }
+        /* Custom scrollbar */
+        .custom-scroll::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scroll::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scroll::-webkit-scrollbar-thumb {
+            background: #ddc1b3;
+            border-radius: 10px;
+        }
+        /* Tactile Button Effect */
+        .btn-tactile {
+            box-shadow: 0 4px 0 0 rgba(0, 0, 0, 0.1);
+            transition: all 0.1s ease;
+        }
+        .btn-tactile:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.1);
+        }
+        /* Squishy interaction */
+        .squish:active {
+            transform: scale(0.96);
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-on-surface": "#f2f1ed",
+                    "on-secondary-container": "#003e73",
+                    "primary-fixed": "#ffdbc9",
+                    "on-background": "#1b1c1a",
+                    "on-primary": "#ffffff",
+                    "tertiary": "#006d41",
+                    "surface-tint": "#9a4600",
+                    "inverse-surface": "#2f312e",
+                    "error": "#ba1a1a",
+                    "on-primary-container": "#682d00",
+                    "secondary": "#0060ac",
+                    "surface-container": "#efeeea",
+                    "on-tertiary-container": "#00482a",
+                    "surface": "#faf9f5",
+                    "surface-container-high": "#e9e8e4",
+                    "primary": "#9a4600",
+                    "tertiary-fixed-dim": "#7adaa1",
+                    "on-secondary-fixed-variant": "#004883",
+                    "on-surface": "#1b1c1a",
+                    "on-error": "#ffffff",
+                    "secondary-fixed-dim": "#a4c9ff",
+                    "on-secondary": "#ffffff",
+                    "surface-variant": "#e3e2df",
+                    "on-tertiary": "#ffffff",
+                    "surface-bright": "#faf9f5",
+                    "secondary-container": "#68abff",
+                    "background": "#faf9f5",
+                    "on-surface-variant": "#564338",
+                    "on-primary-fixed": "#321200",
+                    "on-primary-fixed-variant": "#763300",
+                    "primary-container": "#ff8a3d",
+                    "surface-container-highest": "#e3e2df",
+                    "tertiary-container": "#5cbc86",
+                    "on-secondary-fixed": "#001c39",
+                    "on-error-container": "#93000a",
+                    "outline": "#8a7266",
+                    "inverse-primary": "#ffb68d",
+                    "secondary-fixed": "#d4e3ff",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary-fixed-variant": "#005230",
+                    "surface-container-low": "#f4f4f0",
+                    "surface-dim": "#dbdad6",
+                    "on-tertiary-fixed": "#002110",
+                    "outline-variant": "#ddc1b3",
+                    "primary-fixed-dim": "#ffb68d",
+                    "tertiary-fixed": "#95f7bb",
+                    "error-container": "#ffdad6"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xl": "80px",
+                    "base": "8px",
+                    "xs": "4px",
+                    "gutter": "24px",
+                    "margin-desktop": "64px",
+                    "sm": "12px",
+                    "margin-mobile": "16px",
+                    "lg": "48px",
+                    "md": "24px"
+            },
+            "fontFamily": {
+                    "body-md": ["Be Vietnam Pro"],
+                    "label-md": ["Be Vietnam Pro"],
+                    "headline-lg": ["Plus Jakarta Sans"],
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "body-lg": ["Be Vietnam Pro"],
+                    "headline-sm": ["Plus Jakarta Sans"],
+                    "display-lg": ["Plus Jakarta Sans"],
+                    "headline-lg-mobile": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+</head>
+<body class="bg-surface font-body-md text-on-surface">
+<div class="flex h-screen overflow-hidden">
+<!-- SideNavBar (Shared Component) -->
+<aside class="hidden md:flex flex-col h-full py-md px-base sticky left-0 top-0 overflow-y-auto bg-surface shadow-xl shadow-secondary/10 w-64 rounded-r-3xl z-50">
+<div class="mb-lg px-4">
+<h1 class="font-headline-md text-headline-md font-bold text-primary mb-1">ORION<div class="">CLASS</div></h1>
+<p class="font-label-md text-label-md text-on-surface-variant opacity-80">Petualangan Belajar</p>
+</div>
+<nav class="flex-1 space-y-2">
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high rounded-full px-4 py-3 transition-colors hover:scale-105 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-md text-label-md">Beranda</span>
+</a>
+<a class="flex items-center gap-3 bg-secondary-container text-on-secondary-container rounded-full px-4 py-3 font-bold hover:scale-105 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined fill-icon">smart_toy</span>
+<span class="font-label-md text-label-md">Mentor AI</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high rounded-full px-4 py-3 transition-colors hover:scale-105 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">book_2</span>
+<span class="font-label-md text-label-md">Perpustakaan</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high rounded-full px-4 py-3 transition-colors hover:scale-105 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-md text-label-md">Laporan</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high rounded-full px-4 py-3 transition-colors hover:scale-105 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-md text-label-md">Pusat Bantuan</span>
+</a>
+</nav>
+<div class="mt-md mb-md px-4">
+<a href="#" class="w-full bg-primary-container text-on-primary-container font-bold py-3 rounded-full hover:scale-105 transition-all active:scale-95 btn-tactile flex items-center justify-center">Mulai Belajar</a>
+</div>
+<div class="mt-md mb-md px-4">
+<a class="flex items-center justify-center w-full bg-primary text-white font-bold py-3 rounded-full hover:scale-105 transition-all active:scale-95 shadow-lg shadow-primary/20" href="#">
+<span class="material-symbols-outlined mr-2">play_circle</span>
+<span class="font-label-md text-label-md">Mulai Belajar</span>
+</a>
+</div><div class="pt-base border-t border-outline-variant/30 space-y-2">
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high rounded-full px-4 py-3 transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Pengaturan</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high rounded-full px-4 py-3 transition-colors" href="#">
+<span class="material-symbols-outlined text-error">logout</span>
+<span class="font-label-md text-label-md">Keluar</span>
+</a>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="flex-1 flex flex-col min-w-0 bg-background relative overflow-hidden">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center w-full px-gutter py-sm bg-surface/80 backdrop-blur-md z-40 border-b border-surface-variant/30">
+<div class="flex items-center gap-4">
+<button class="md:hidden p-2 text-on-surface-variant">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h2 class="font-headline-sm text-headline-sm text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">psychology</span>
+                    Peta Belajar Saya
+                </h2>
+</div>
+<div class="flex items-center gap-md">
+<div class="hidden sm:flex items-center bg-surface-container rounded-full px-4 py-2 border-2 border-outline-variant/50 focus-within:border-secondary transition-all">
+<span class="material-symbols-outlined text-on-surface-variant mr-2">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm font-label-md w-40 md:w-64" placeholder="Cari topik..." type="text">
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 hover:bg-secondary-container/50 rounded-full transition-all active:translate-y-0.5 text-on-surface-variant">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="flex items-center gap-2 p-1 pr-3 hover:bg-secondary-container/50 rounded-full transition-all active:translate-y-0.5 text-on-surface-variant">
+<span class="material-symbols-outlined text-4xl">account_circle</span>
+<span class="hidden lg:block font-label-md">Budi</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Dynamic Content Layout -->
+<div class="flex-1 flex flex-col lg:flex-row overflow-hidden">
+<!-- Left Side: Cognitive Map (Peta Kognitif) -->
+<div class="flex-1 relative overflow-hidden bg-surface-container-lowest flex flex-col">
+<div class="p-md md:p-gutter flex items-center justify-between z-10 bg-white/60 backdrop-blur-sm border-b border-surface-variant/20">
+<div>
+<h3 class="font-headline-md text-on-surface">Peta Kognitif</h3>
+<p class="text-sm text-on-surface-variant">Alur pemahamanmu tentang Matematika Dasar</p>
+</div>
+<div class="flex gap-2">
+<button class="p-2 bg-surface-container-high rounded-lg text-on-surface-variant hover:bg-primary-container hover:text-on-primary-container transition-colors">
+<span class="material-symbols-outlined">zoom_in</span>
+</button>
+<button class="p-2 bg-surface-container-high rounded-lg text-on-surface-variant hover:bg-primary-container hover:text-on-primary-container transition-colors">
+<span class="material-symbols-outlined">zoom_out</span>
+</button>
+</div>
+</div>
+<!-- Interactive Map Canvas -->
+<div class="flex-1 relative overflow-hidden bg-[radial-gradient(#e3e2df_1px,transparent_1px)] [background-size:20px_20px]">
+<!-- Connections (Visual representation) -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none opacity-40">
+<line stroke="#68abff" stroke-dasharray="8,4" stroke-width="2" x1="50%" x2="30%" y1="50%" y2="30%"></line>
+<line stroke="#ff8a3d" stroke-width="2" x1="50%" x2="70%" y1="50%" y2="35%"></line>
+<line stroke="#5cbc86" stroke-width="2" x1="50%" x2="60%" y1="50%" y2="75%"></line>
+</svg>
+<!-- Bubble Nodes -->
+<!-- Center Active Node -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 group cursor-pointer">
+<div class="w-32 h-32 md:w-40 md:h-40 rounded-full bg-primary-container flex flex-col items-center justify-center text-center p-4 shadow-xl shadow-primary/20 border-4 border-white animate-pulse">
+<span class="material-symbols-outlined text-4xl mb-2 text-on-primary-container">functions</span>
+<span class="font-bold text-on-primary-container text-xs md:text-sm">Bilangan Bulat</span>
+</div>
+</div>
+<!-- Neighbor Nodes -->
+<div class="absolute top-[25%] left-[25%] group cursor-pointer hover:scale-110 transition-transform">
+<div class="w-24 h-24 rounded-full bg-secondary-container flex flex-col items-center justify-center text-center p-2 shadow-lg border-2 border-white">
+<span class="material-symbols-outlined text-2xl text-on-secondary-container">add_circle</span>
+<span class="font-bold text-on-secondary-container text-[10px]">Penjumlahan</span>
+</div>
+</div>
+<div class="absolute top-[30%] left-[65%] group cursor-pointer hover:scale-110 transition-transform">
+<div class="w-24 h-24 rounded-full bg-tertiary-container flex flex-col items-center justify-center text-center p-2 shadow-lg border-2 border-white">
+<span class="material-symbols-outlined text-2xl text-on-tertiary-container">history_edu</span>
+<span class="font-bold text-on-tertiary-container text-[10px]">Sejarah Angka</span>
+</div>
+</div>
+<div class="absolute top-[70%] left-[55%] group cursor-pointer hover:scale-110 transition-transform">
+<div class="w-28 h-28 rounded-full bg-surface-container-highest flex flex-col items-center justify-center text-center p-2 shadow-lg border-2 border-white">
+<span class="material-symbols-outlined text-2xl text-on-surface-variant">remove_circle</span>
+<span class="font-bold text-on-surface-variant text-[10px]">Pengurangan</span>
+</div>
+</div>
+</div>
+<!-- Floating Chat Quick Input -->
+<div class="absolute bottom-6 left-1/2 -translate-x-1/2 w-[90%] max-w-2xl z-20">
+<div class="bg-white rounded-3xl border-2 border-outline-variant p-2 flex items-center shadow-2xl focus-within:border-secondary transition-all">
+<button class="p-3 text-on-surface-variant hover:bg-surface-container-high rounded-full transition-all">
+<span class="material-symbols-outlined">attach_file</span>
+</button>
+<input class="flex-1 border-none focus:ring-0 text-on-surface font-body-md py-3 bg-transparent" placeholder="Tanya detail tentang topik ini..." type="text">
+<button class="w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 active:scale-90 transition-all">
+<span class="material-symbols-outlined">send</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Right Side: Focus Detail (Detail Fokus) Sidebar -->
+<div class="w-full lg:w-[400px] bg-surface-container-low border-l border-surface-variant/30 flex flex-col overflow-y-auto custom-scroll">
+<div class="p-md space-y-gutter">
+<!-- Section Title -->
+<div class="flex items-center gap-2 text-primary font-bold">
+<span class="material-symbols-outlined">info</span>
+<h4 class="font-headline-sm">Detail Fokus</h4>
+</div>
+<!-- Video Lesson Section -->
+<div class="space-y-3">
+<h5 class="font-label-md text-on-surface-variant uppercase tracking-wider">Video Materi</h5>
+<div class="bg-white rounded-3xl overflow-hidden shadow-md border border-white/50 group cursor-pointer relative">
+<div class="aspect-video bg-surface-container-highest relative flex items-center justify-center">
+<img alt="Video Thumb" class="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-500" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg">
+<div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
+<div class="w-14 h-14 bg-primary text-white rounded-full flex items-center justify-center shadow-xl z-10 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl fill-icon">play_arrow</span>
+</div>
+</div>
+<div class="p-4 bg-white">
+<h6 class="font-bold text-on-surface mb-1">Mengapa (-) x (-) jadi (+)?</h6>
+<p class="text-xs text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">schedule</span> 04:20 Menit
+                                </p>
+</div>
+</div>
+</div>
+<!-- Mini Quiz Section -->
+<div class="bg-white rounded-3xl p-5 shadow-lg border-2 border-secondary-container/20">
+<div class="flex items-center justify-between mb-4">
+<h5 class="font-bold text-secondary flex items-center gap-2">
+<span class="material-symbols-outlined">quiz</span> MINI KUIS
+                            </h5>
+<span class="text-[10px] bg-secondary-container px-2 py-0.5 rounded-full text-on-secondary-container font-bold">BONUS XP +50</span>
+</div>
+<p class="text-on-surface font-body-md mb-6">Berapakah hasil dari <br><strong class="text-lg">(-5) x (-3) + (-2)</strong>?</p>
+<div class="grid grid-cols-1 gap-3">
+<button class="w-full py-3 px-4 rounded-2xl border-2 border-surface-variant hover:border-secondary hover:bg-secondary-container/10 transition-all text-left font-label-md flex justify-between items-center group">
+<span>A. 13</span>
+<span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity">chevron_right</span>
+</button>
+<button class="w-full py-3 px-4 rounded-2xl border-2 border-surface-variant hover:border-secondary hover:bg-secondary-container/10 transition-all text-left font-label-md flex justify-between items-center group">
+<span>B. -17</span>
+<span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity">chevron_right</span>
+</button>
+<button class="w-full py-3 px-4 rounded-2xl border-2 border-surface-variant hover:border-secondary hover:bg-secondary-container/10 transition-all text-left font-label-md flex justify-between items-center group">
+<span>C. 17</span>
+<span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Tips Belajar Section -->
+<div class="bg-gradient-to-br from-tertiary-container to-tertiary p-5 rounded-3xl text-white shadow-xl relative overflow-hidden group">
+<div class="absolute -right-4 -top-4 opacity-20 group-hover:scale-125 transition-transform duration-500">
+<span class="material-symbols-outlined text-[80px]">emoji_objects</span>
+</div>
+<h6 class="font-bold text-lg mb-2 relative z-10 flex items-center gap-2">
+<span class="material-symbols-outlined text-white">tips_and_updates</span> Tips Belajar
+                        </h6>
+<p class="text-sm opacity-90 leading-relaxed relative z-10">Bayangkan angka negatif seperti "hutang". Hutang yang dibatalkan adalah sebuah keuntungan!</p>
+<button class="mt-4 w-full py-2 bg-white/20 hover:bg-white/30 backdrop-blur-md rounded-xl text-xs font-bold transition-colors">Lihat Tips Lainnya</button>
+</div>
+<!-- Space padding for bottom -->
+<div class="h-gutter"></div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Mobile Navigation Bar -->
+<div class="md:hidden fixed bottom-0 left-0 right-0 bg-surface/90 backdrop-blur-md border-t border-outline-variant/30 px-6 py-3 flex justify-between items-center z-50">
+<a class="flex flex-col items-center gap-1 text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="text-[10px] font-label-md">Beranda</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-secondary font-bold" href="#">
+<span class="material-symbols-outlined fill-icon">smart_toy</span>
+<span class="text-[10px] font-label-md">Mentor AI</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">book_2</span>
+<span class="text-[10px] font-label-md">Perpustakaan</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="text-[10px] font-label-md">Laporan</span>
+</a>
+</div></body></html>

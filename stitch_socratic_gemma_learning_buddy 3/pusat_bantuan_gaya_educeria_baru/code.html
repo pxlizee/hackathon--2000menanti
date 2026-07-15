@@ -1,0 +1,401 @@
+<!DOCTYPE html><html class="light" lang="id"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Pusat Bantuan - SOCRATES-GEMMA</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Be+Vietnam+Pro:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        
+        .organic-blob {
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            transition: all 1s ease-in-out;
+        }
+
+        .squishy-button:active {
+            transform: scale(0.95) translateY(2px);
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #ddc1b3;
+            border-radius: 10px;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-on-surface": "#f2f1ed",
+                        "on-secondary-container": "#003e73",
+                        "primary-fixed": "#ffdbc9",
+                        "on-background": "#1b1c1a",
+                        "on-primary": "#ffffff",
+                        "tertiary": "#006d41",
+                        "surface-tint": "#9a4600",
+                        "inverse-surface": "#2f312e",
+                        "error": "#ba1a1a",
+                        "on-primary-container": "#682d00",
+                        "secondary": "#0060ac",
+                        "surface-container": "#efeeea",
+                        "on-tertiary-container": "#00482a",
+                        "surface": "#faf9f5",
+                        "surface-container-high": "#e9e8e4",
+                        "primary": "#9a4600",
+                        "tertiary-fixed-dim": "#7adaa1",
+                        "on-secondary-fixed-variant": "#004883",
+                        "on-surface": "#1b1c1a",
+                        "on-error": "#ffffff",
+                        "secondary-fixed-dim": "#a4c9ff",
+                        "on-secondary": "#ffffff",
+                        "surface-variant": "#e3e2df",
+                        "on-tertiary": "#ffffff",
+                        "surface-bright": "#faf9f5",
+                        "secondary-container": "#68abff",
+                        "background": "#faf9f5",
+                        "on-surface-variant": "#564338",
+                        "on-primary-fixed": "#321200",
+                        "on-primary-fixed-variant": "#763300",
+                        "primary-container": "#ff8a3d",
+                        "surface-container-highest": "#e3e2df",
+                        "tertiary-container": "#5cbc86",
+                        "on-secondary-fixed": "#001c39",
+                        "on-error-container": "#93000a",
+                        "outline": "#8a7266",
+                        "inverse-primary": "#ffb68d",
+                        "secondary-fixed": "#d4e3ff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed-variant": "#005230",
+                        "surface-container-low": "#f4f4f0",
+                        "surface-dim": "#dbdad6",
+                        "on-tertiary-fixed": "#002110",
+                        "outline-variant": "#ddc1b3",
+                        "primary-fixed-dim": "#ffb68d",
+                        "tertiary-fixed": "#95f7bb",
+                        "error-container": "#ffdad6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "80px",
+                        "base": "8px",
+                        "xs": "4px",
+                        "gutter": "24px",
+                        "margin-desktop": "64px",
+                        "sm": "12px",
+                        "margin-mobile": "16px",
+                        "lg": "48px",
+                        "md": "24px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Be Vietnam Pro"],
+                        "label-md": ["Be Vietnam Pro"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "body-lg": ["Be Vietnam Pro"],
+                        "headline-sm": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen flex overflow-hidden">
+<!-- SideNavBar Anchor -->
+<aside class="hidden md:flex flex-col h-full py-md px-base sticky left-0 top-0 overflow-y-auto bg-surface shadow-xl shadow-secondary/10 h-screen w-64 rounded-r-3xl z-50">
+<div class="mb-lg px-4">
+<h1 class="font-headline-md text-headline-md font-bold text-primary">ORION<div>CLASS</div></h1>
+<p class="text-on-surface-variant font-label-md">Petualangan Belajar</p>
+</div>
+<nav class="flex flex-col gap-2 flex-grow">
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high rounded-full px-4 py-3 transition-colors hover:scale-105 duration-200" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-md">Beranda</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high rounded-full px-4 py-3 transition-colors hover:scale-105 duration-200" href="#">
+<span class="material-symbols-outlined">smart_toy</span>
+<span class="font-label-md">Mentor AI</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high rounded-full px-4 py-3 transition-colors hover:scale-105 duration-200" href="#">
+<span class="material-symbols-outlined">book_2</span>
+<span class="font-label-md">Perpustakaan</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high rounded-full px-4 py-3 transition-colors hover:scale-105 duration-200" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-md">Laporan</span>
+</a>
+<a class="flex items-center gap-3 bg-secondary-container text-on-secondary-container rounded-full px-4 py-3 font-bold" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-md">Pusat Bantuan</span>
+</a>
+</nav>
+<div class="mt-auto pt-md border-t border-outline-variant/30 flex flex-col gap-2">
+<button class="bg-primary text-on-primary rounded-full py-3 px-6 font-bold shadow-lg shadow-primary/20 mb-4 squishy-button transition-transform">
+                Mulai Belajar
+            </button>
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high rounded-full px-4 py-3 transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md">Pengaturan</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high rounded-full px-4 py-3 transition-colors" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-md">Keluar</span>
+</a>
+</div>
+</aside>
+<main class="flex-grow flex flex-col h-screen overflow-y-auto custom-scrollbar relative">
+<!-- TopAppBar Anchor -->
+<header class="flex justify-between items-center w-full px-gutter py-sm bg-surface/80 backdrop-blur-md sticky top-0 z-40">
+<div class="flex items-center gap-md">
+<button class="md:hidden p-2 text-primary">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h2 class="font-headline-lg text-headline-lg font-black text-primary md:hidden">SOCRATES</h2>
+</div>
+<div class="flex-grow max-w-xl mx-gutter hidden sm:block">
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full bg-surface-container-low border-2 border-outline-variant focus:border-secondary rounded-full py-3 pl-12 pr-4 transition-all outline-none" placeholder="Cari jawaban untuk masalahmu..." type="text">
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-on-surface-variant hover:bg-secondary-container/50 rounded-full transition-all">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="w-10 h-10 rounded-full bg-tertiary-container flex items-center justify-center text-on-tertiary-container font-bold overflow-hidden">
+<span class="material-symbols-outlined">account_circle</span>
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<div class="flex-grow p-gutter md:p-margin-desktop space-y-lg relative">
+<!-- Hero Section -->
+<section class="text-center space-y-md max-w-3xl mx-auto">
+<div class="inline-flex items-center justify-center bg-tertiary-fixed text-on-tertiary-fixed-variant px-6 py-2 rounded-full font-label-md mb-4 shadow-sm">
+<span class="material-symbols-outlined mr-2">waving_hand</span> Kami di sini untuk membantumu!
+                </div>
+<h1 class="font-display-lg text-display-lg text-primary leading-tight">Halo, Apa yang Bisa Kami Bantu?</h1>
+<p class="text-body-lg font-body-lg text-on-surface-variant">Temukan jawaban cepat untuk pertanyaanmu atau hubungi mentor kami langsung.</p>
+</section>
+<!-- Bento Grid of Help Categories -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-md">
+<div class="md:col-span-2 bg-secondary-fixed text-on-secondary-fixed p-lg rounded-[32px] relative overflow-hidden group hover:shadow-2xl transition-all duration-300">
+<div class="relative z-10">
+<span class="material-symbols-outlined text-4xl mb-4 bg-white/30 p-4 rounded-2xl">rocket_launch</span>
+<h3 class="font-headline-md text-headline-md mb-2">Panduan Memulai</h3>
+<p class="text-body-md opacity-80 mb-6 max-w-md">Pelajari cara menjelajahi dunia Socrates-Gemma dan temukan fitur-fitur seru untuk belajarmu.</p>
+<button class="bg-on-secondary-fixed text-secondary-fixed px-6 py-3 rounded-full font-bold flex items-center gap-2 squishy-button">
+                            Lihat Tutorial <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+<div class="absolute -right-10 -bottom-10 w-64 h-64 bg-secondary-container/30 rounded-full blur-3xl group-hover:scale-125 transition-transform"></div>
+</div>
+<div class="bg-surface-container-highest p-lg rounded-[32px] border-2 border-outline-variant/30 flex flex-col justify-between hover:border-primary transition-colors">
+<div>
+<span class="material-symbols-outlined text-4xl mb-4 text-primary">security</span>
+<h3 class="font-headline-sm text-headline-sm mb-2">Akun &amp; Keamanan</h3>
+<p class="text-label-md text-on-surface-variant">Kelola profil, kata sandi, dan privasimu.</p>
+</div>
+<a class="text-primary font-bold flex items-center gap-1 group mt-6" href="#">
+                        Pengaturan Akun <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">chevron_right</span>
+</a>
+</div>
+<div class="bg-tertiary-container text-on-tertiary-container p-lg rounded-[32px] flex flex-col justify-between hover:rotate-1 transition-transform">
+<div>
+<span class="material-symbols-outlined text-4xl mb-4">payments</span>
+<h3 class="font-headline-sm text-headline-sm mb-2">Langganan &amp; Koin</h3>
+<p class="text-label-md opacity-80">Info seputar paket belajar dan koin hadiah.</p>
+</div>
+<a class="text-on-tertiary-container font-bold flex items-center gap-1 group mt-6" href="#">
+                        Detail Pembayaran <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">chevron_right</span>
+</a>
+</div>
+<div class="md:col-span-2 bg-surface-container-low border-2 border-dashed border-outline-variant p-lg rounded-[32px] flex flex-col md:flex-row items-center gap-lg">
+<div class="w-full md:w-1/3 aspect-square rounded-2xl overflow-hidden shadow-lg">
+<img class="w-full h-full object-cover" data-alt="A cheerful 3D cartoon owl character wearing graduation cap and holding a magnifying glass, standing in a brightly lit digital library with soft pastel colors and high-key lighting. The style is modern, friendly, and clean with organic minimalism." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAFeTFXgbppTrR92W45XO99CwBSvEkSgEhRPtRb8qji848vvK_cEO9t8sr9rn2ed7ws7CiCItcQpGvFp6Kj2tZVac2HXpUL5P0ARACZzwaQsl3a7Qo57vpnLtW6zxE8kurBgtGqkeV8ADAUQn3zbSKJeNb5D3bb4hxOy3VqLTQttDVuFI69QW6ADutzJGNnm8aW9eh0HokyhEMqxU3yOS0kZXyQTFdrRg1SwXzX5Laj6RBhlUmotNQkOIScQ8CA-QaP35j2h1kJpLk">
+</div>
+<div class="flex-grow">
+<h3 class="font-headline-md text-headline-md text-primary mb-2">Tanya Mentor AI</h3>
+<p class="text-body-md text-on-surface-variant mb-6">Mentor Gemma siap menjawab pertanyaan belajarmu kapan saja, 24/7!</p>
+<button class="bg-primary text-on-primary px-8 py-4 rounded-full font-bold shadow-xl shadow-primary/20 squishy-button">
+                            Mulai Chat Sekarang
+                        </button>
+</div>
+</div>
+</section>
+<!-- FAQ Section -->
+<section class="space-y-md py-lg">
+<div class="flex items-end justify-between mb-md">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Pertanyaan Populer</h2>
+<p class="text-on-surface-variant">Yang paling sering ditanyakan oleh teman-temanmu.</p>
+</div>
+<button class="text-primary font-bold underline decoration-2 underline-offset-4">Lihat Semua</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<details class="group bg-surface-container-lowest border-2 border-outline-variant/20 rounded-2xl p-6 transition-all open:border-secondary open:shadow-lg">
+<summary class="flex items-center justify-between cursor-pointer list-none font-headline-sm text-headline-sm">
+                            Bagaimana cara mengumpulkan Koin?
+                            <span class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
+</summary>
+<p class="mt-4 text-on-surface-variant leading-relaxed">
+                            Kamu bisa mendapatkan koin dengan menyelesaikan misi harian, menonton video pembelajaran, dan menjawab kuis dengan benar. Koin bisa ditukarkan dengan hadiah seru di Toko Hadiah!
+                        </p>
+</details>
+<details class="group bg-surface-container-lowest border-2 border-outline-variant/20 rounded-2xl p-6 transition-all open:border-secondary open:shadow-lg">
+<summary class="flex items-center justify-between cursor-pointer list-none font-headline-sm text-headline-sm">
+                            Apakah saya bisa belajar offline?
+                            <span class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
+</summary>
+<p class="mt-4 text-on-surface-variant leading-relaxed">
+                            Tentu! Kamu bisa mendownload materi tertentu ke dalam "Perpustakaan" untuk dipelajari nanti tanpa koneksi internet. Pastikan kamu sudah klik tombol download ya!
+                        </p>
+</details>
+<details class="group bg-surface-container-lowest border-2 border-outline-variant/20 rounded-2xl p-6 transition-all open:border-secondary open:shadow-lg">
+<summary class="flex items-center justify-between cursor-pointer list-none font-headline-sm text-headline-sm">
+                            Lupa kata sandi, apa yang harus dilakukan?
+                            <span class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
+</summary>
+<p class="mt-4 text-on-surface-variant leading-relaxed">
+                            Jangan panik! Klik "Lupa Kata Sandi" di halaman login, lalu masukkan email orang tuamu. Kami akan mengirimkan instruksi untuk membuat kata sandi baru.
+                        </p>
+</details>
+<details class="group bg-surface-container-lowest border-2 border-outline-variant/20 rounded-2xl p-6 transition-all open:border-secondary open:shadow-lg">
+<summary class="flex items-center justify-between cursor-pointer list-none font-headline-sm text-headline-sm">
+                            Apa itu Mentor AI?
+                            <span class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
+</summary>
+<p class="mt-4 text-on-surface-variant leading-relaxed">
+                            Mentor AI adalah asisten belajarmu yang pintar. Ia bisa membantu menjelaskan rumus matematika yang sulit, membantu mencari ide cerita, atau sekadar menemanimu mengulang pelajaran.
+                        </p>
+</details>
+</div>
+</section>
+<!-- Contact Options -->
+<section class="bg-surface-container text-center p-xl rounded-[48px] space-y-md border-4 border-white shadow-inner">
+<h2 class="font-headline-lg text-headline-lg">Masih butuh bantuan?</h2>
+<p class="text-body-lg text-on-surface-variant max-w-xl mx-auto">Tim kami siap membantumu dan orang tuamu kapan saja. Pilih cara yang paling nyaman!</p>
+<div class="flex flex-wrap justify-center gap-gutter pt-md">
+<div class="bg-surface-container-lowest p-gutter rounded-3xl w-64 shadow-sm hover:shadow-md transition-shadow">
+<div class="w-12 h-12 bg-secondary/10 text-secondary rounded-full flex items-center justify-center mx-auto mb-4">
+<span class="material-symbols-outlined">mail</span>
+</div>
+<h4 class="font-bold mb-1">Kirim Email</h4>
+<p class="text-label-md text-on-surface-variant mb-4">halo@socratesgemma.com</p>
+<button class="text-secondary font-bold hover:underline">Tulis Email</button>
+</div>
+<div class="bg-surface-container-lowest p-gutter rounded-3xl w-64 shadow-sm hover:shadow-md transition-shadow border-2 border-secondary">
+<div class="w-12 h-12 bg-secondary text-on-secondary rounded-full flex items-center justify-center mx-auto mb-4">
+<span class="material-symbols-outlined">forum</span>
+</div>
+<h4 class="font-bold mb-1">Live Chat</h4>
+<p class="text-label-md text-on-surface-variant mb-4">Senin - Jumat (08:00 - 17:00)</p>
+<button class="bg-secondary text-on-secondary px-6 py-2 rounded-full text-label-md font-bold squishy-button">Mulai Chat</button>
+</div>
+<div class="bg-surface-container-lowest p-gutter rounded-3xl w-64 shadow-sm hover:shadow-md transition-shadow">
+<div class="w-12 h-12 bg-tertiary/10 text-tertiary rounded-full flex items-center justify-center mx-auto mb-4">
+<span class="material-symbols-outlined">call</span>
+</div>
+<h4 class="font-bold mb-1">Telepon</h4>
+<p class="text-label-md text-on-surface-variant mb-4">+62 21 1234 5678</p>
+<button class="text-tertiary font-bold hover:underline">Hubungi Sekarang</button>
+</div>
+</div>
+</section>
+</div>
+<footer class="mt-auto p-gutter text-center text-label-md text-outline">
+            © 2024 SOCRATES-GEMMA. Dibuat dengan penuh cinta untuk anak Indonesia.
+        </footer>
+</main>
+<!-- BottomNavBar for Mobile -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 bg-surface/90 backdrop-blur-xl flex justify-around items-center py-sm border-t border-outline-variant/20 z-50 rounded-t-3xl shadow-[0_-8px_30px_rgba(0,0,0,0.05)]">
+<a class="flex flex-col items-center gap-1 text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="text-[10px] font-bold">Beranda</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">smart_toy</span>
+<span class="text-[10px] font-bold">Mentor AI</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-primary" href="#">
+<div class="bg-primary-container p-2 rounded-2xl -mt-8 shadow-lg shadow-primary/30">
+<span class="material-symbols-outlined text-on-primary-container">help</span>
+</div>
+<span class="text-[10px] font-bold">Bantuan</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">book_2</span>
+<span class="text-[10px] font-bold">Materi</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">account_circle</span>
+<span class="text-[10px] font-bold">Profil</span>
+</a>
+</nav>
+<script>
+        // Simple Interaction logic
+        document.querySelectorAll('details').forEach((el) => {
+            el.addEventListener('toggle', (e) => {
+                if (el.open) {
+                    document.querySelectorAll('details').forEach((other) => {
+                        if (other !== el) other.open = false;
+                    });
+                }
+            });
+        });
+
+        // Atmospheric visual effect logic
+        const blobs = document.querySelectorAll('.organic-blob');
+        setInterval(() => {
+            blobs.forEach(blob => {
+                const r1 = Math.floor(Math.random() * 40) + 30;
+                const r2 = Math.floor(Math.random() * 40) + 30;
+                const r3 = Math.floor(Math.random() * 40) + 30;
+                const r4 = Math.floor(Math.random() * 40) + 30;
+                blob.style.borderRadius = `${r1}% ${100-r1}% ${r2}% ${100-r2}% / ${r3}% ${r4}% ${100-r4}% ${100-r3}%`;
+            });
+        }, 3000);
+    </script>
+
+
+
+</body></html>
